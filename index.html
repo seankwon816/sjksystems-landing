@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SJK Systems, Inc. — AI Safety Infrastructure</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 80px 24px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .tagline {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 48px;
+        }
+        .description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin-bottom: 56px;
+            text-align: center;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 56px;
+        }
+        .product-card {
+            background: #141414;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: left;
+            transition: border-color 0.2s;
+        }
+        .product-card:hover {
+            border-color: #444;
+        }
+        .product-card h2 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        .product-card p {
+            font-size: 0.95rem;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .product-card a {
+            color: #4a9eff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .product-card a:hover {
+            text-decoration: underline;
+        }
+        .founder {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        .badges {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        .badge {
+            font-size: 0.8rem;
+            color: #888;
+            background: #141414;
+            border: 1px solid #222;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+        .contact {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .contact a {
+            color: #4a9eff;
+            text-decoration: none;
+        }
+        .legal {
+            font-size: 0.75rem;
+            color: #444;
+            margin-top: 48px;
+        }
+        @media (max-width: 600px) {
+            .products { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SJK Systems, Inc.</h1>
+        <p class="tagline">AI Safety Infrastructure</p>
+
+        <p class="description">
+            SJK Systems builds infrastructure that makes autonomous AI agents safe, reliable, and accountable. As AI agents move from research demos to production systems, there is no standard infrastructure for monitoring their runtime behavior or verifying trust between agents. We are building that foundation.
+        </p>
+
+        <div class="products">
+            <div class="product-card">
+                <h2>ClevAgent</h2>
+                <p>Real time AI agent monitoring platform. Detects infinite loops, token waste, hallucination patterns, and behavioral drift. Automatically restarts failing agents.</p>
+                <a href="https://clevagent.io" target="_blank">Visit clevagent.io &rarr;</a>
+            </div>
+            <div class="product-card">
+                <h2>Foragent</h2>
+                <p>Agent to agent trust and verification layer. Enables AI agents to verify identity, capability, and safety compliance before interacting with each other.</p>
+                <a href="https://foragent.io" target="_blank">Visit foragent.io &rarr;</a>
+            </div>
+        </div>
+
+        <div class="badges">
+            <span class="badge">Member of Microsoft for Startups</span>
+            <span class="badge">Ann Arbor, Michigan</span>
+            <span class="badge">Michigan C-Corp</span>
+        </div>
+
+        <p class="founder">Founded by Sean Kwon</p>
+
+        <p class="contact">Contact: <a href="mailto:sean@sjksystems.com">sean@sjksystems.com</a></p>
+
+        <p class="legal">&copy; 2026 SJK Systems, Inc. All rights reserved. 618 South Main Street, Ann Arbor, MI 48104</p>
+    </div>
+</body>
+</html>
