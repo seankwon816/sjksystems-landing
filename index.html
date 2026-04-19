@@ -22,135 +22,249 @@
     <meta name="twitter:title" content="SJK Systems, Inc. — AI Safety Infrastructure">
     <meta name="twitter:description" content="Infrastructure that makes autonomous AI agents safe, reliable, and accountable.">
     <meta name="twitter:image" content="https://sjksystems.com/logo-full.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600&display=swap">
+
     <style>
+        :root {
+            --bg-primary: #0a0808;
+            --bg-card: #1a1614;
+            --text-primary: #f3eee3;
+            --text-secondary: #a8a29e;
+            --text-muted: #57534e;
+            --border: #292524;
+            --border-hover: #44403c;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Warm grain noise overlay — almost invisible but removes the "flat" feel */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.89 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
         .container {
             max-width: 800px;
             width: 100%;
-            padding: 80px 24px;
+            padding: 96px 24px;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
+
+        /* Staggered page-load reveal */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .logo-img, .tagline, .description, .products, .badges, .founder, .contact, .legal {
+            opacity: 0;
+            animation: fadeUp 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+        }
+        .logo-img    { animation-delay: 0.1s;  }
+        .tagline     { animation-delay: 0.25s; }
+        .description { animation-delay: 0.4s;  }
+        .products    { animation-delay: 0.55s; }
+        .badges      { animation-delay: 0.75s; }
+        .founder     { animation-delay: 0.85s; }
+        .contact     { animation-delay: 0.95s; }
+        .legal       { animation-delay: 1.05s; }
+
+        .logo-img {
+            width: 240px;
+            margin-bottom: -52px;
+            display: inline-block;
         }
         .tagline {
-            font-size: 1.2rem;
-            color: #888;
-            margin-bottom: 48px;
+            font-family: 'Fraunces', Georgia, serif;
+            font-optical-sizing: auto;
+            font-size: 1.4rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            margin-bottom: 56px;
         }
         .description {
             font-size: 1.05rem;
-            line-height: 1.8;
-            color: #b0b0b0;
-            margin-bottom: 72px;
-            text-align: center;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin: 0 auto 80px;
+            max-width: 620px;
         }
         .products {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 20px;
             margin-bottom: 72px;
         }
         .product-card {
-            background: #141414;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 32px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px 26px;
             text-align: left;
-            transition: border-color 0.2s;
+            transition:
+                transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1),
+                border-color 0.35s,
+                box-shadow 0.35s;
         }
-        .product-card:hover {
-            border-color: #444;
+        .product-card.clevagent {
+            background:
+                linear-gradient(135deg, rgba(74, 144, 255, 0.11) 0%, rgba(74, 144, 255, 0.02) 70%),
+                var(--bg-card);
+            border-color: rgba(74, 144, 255, 0.25);
+        }
+        .product-card.foragent {
+            background:
+                linear-gradient(135deg, rgba(157, 123, 255, 0.11) 0%, rgba(157, 123, 255, 0.02) 70%),
+                var(--bg-card);
+            border-color: rgba(157, 123, 255, 0.25);
+        }
+        .product-card.clevagent h2 { color: #8ab4ff; }
+        .product-card.foragent h2 { color: #c4a8ff; }
+        .product-card.clevagent p { color: #a8b0c0; }
+        .product-card.foragent p { color: #b0a8c0; }
+        .product-card.clevagent a {
+            color: #8ab4ff;
+            border-bottom-color: rgba(138, 180, 255, 0.35);
+        }
+        .product-card.clevagent a:hover { border-bottom-color: #8ab4ff; }
+        .product-card.foragent a {
+            color: #c4a8ff;
+            border-bottom-color: rgba(196, 168, 255, 0.35);
+        }
+        .product-card.foragent a:hover { border-bottom-color: #c4a8ff; }
+        .product-card.clevagent:hover {
+            border-color: rgba(74, 144, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 22px 44px -22px rgba(74, 144, 255, 0.22);
+        }
+        .product-card.foragent:hover {
+            border-color: rgba(157, 123, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 22px 44px -22px rgba(157, 123, 255, 0.22);
         }
         .product-card h2 {
-            font-size: 1.3rem;
-            color: #ffffff;
-            margin-bottom: 12px;
+            font-family: 'Fraunces', Georgia, serif;
+            font-optical-sizing: auto;
+            font-size: 1.55rem;
+            font-weight: 500;
+            letter-spacing: -0.015em;
+            color: var(--text-primary);
+            margin-bottom: 14px;
         }
         .product-card p {
             font-size: 0.95rem;
-            color: #888;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 22px;
         }
         .product-card a {
-            color: #4a9eff;
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-hover);
+            padding-bottom: 2px;
+            transition: border-color 0.2s;
         }
-        .product-card a:hover {
-            text-decoration: underline;
-        }
+        .product-card a:hover { border-bottom-color: var(--text-primary); }
+
         .founder {
             font-size: 0.9rem;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 16px;
         }
         .badges {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 48px;
         }
         .badge {
-            font-size: 0.8rem;
-            color: #888;
-            background: #141414;
-            border: 1px solid #222;
-            padding: 6px 14px;
-            border-radius: 20px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 7px 14px;
+            border-radius: 999px;
+            letter-spacing: 0.01em;
         }
         .contact {
             font-size: 0.9rem;
-            color: #666;
+            color: var(--text-secondary);
         }
         .contact a {
-            color: #4a9eff;
+            color: var(--text-primary);
             text-decoration: none;
+            border-bottom: 1px solid var(--border-hover);
+            padding-bottom: 1px;
+            transition: border-color 0.2s;
         }
+        .contact a:hover { border-bottom-color: var(--text-primary); }
+
         .legal {
             font-size: 0.75rem;
-            color: #444;
-            margin-top: 48px;
+            color: var(--text-muted);
+            margin-top: 56px;
+            letter-spacing: 0.02em;
+            line-height: 1.6;
         }
+
         @media (max-width: 600px) {
             .products { grid-template-columns: 1fr; }
-            h1 { font-size: 1.8rem; }
+            .container { padding: 72px 22px; }
+            .logo-img { width: 200px; margin-bottom: -45px; }
+            .tagline { font-size: 1.25rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .logo-img, .tagline, .description, .products, .badges, .founder, .contact, .legal {
+                animation: none;
+                opacity: 1;
+            }
+            .product-card { transition: none; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="logo-full.png" alt="SJK Systems" style="width: 220px; margin-bottom: -55px;">
+        <img src="logo-full.png" alt="SJK Systems" class="logo-img">
         <p class="tagline">AI Safety Infrastructure</p>
 
         <p class="description">
-            SJK Systems builds infrastructure that makes autonomous AI agents safe, reliable, and accountable. As AI agents move from research demos to production systems, the world needs standard infrastructure for coaching their behavior and verifying trust between them. We are building that foundation.
+            SJK Systems builds the standards infrastructure that autonomous AI agents need as they move from research into production. Two products. A middle layer that keeps your own agent working smarter and safer, and a communication layer that lets agents across different users find and talk to each other.
         </p>
 
         <div class="products">
-            <div class="product-card">
+            <div class="product-card clevagent">
                 <h2>ClevAgent</h2>
-                <p>A coaching layer for AI agents. The desktop app embeds a terminal and a local gateway that surface coaching notes in real time, so your agents stay on task without burning budget. Everything runs locally on your machine.</p>
+                <p>A middle layer for AI agents. The desktop app runs entirely on your machine, sitting between your agent and the model to keep control of cost, pace, and direction. The same layer will extend to security and audit as the category matures.</p>
                 <a href="https://clevagent.io" target="_blank">Visit clevagent.io &rarr;</a>
             </div>
-            <div class="product-card">
+            <div class="product-card foragent">
                 <h2>ForAgent</h2>
-                <p>Agent to agent trust and verification layer. Enables AI agents to verify identity, capability, and safety compliance before interacting with each other.</p>
+                <p>A communication layer for AI agents across users. Publish your agent to a public URL, approve incoming requests, and let agents talk through a bounded relay thread.</p>
                 <a href="https://foragent.io" target="_blank">Visit foragent.io &rarr;</a>
             </div>
         </div>
