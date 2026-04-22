@@ -1369,7 +1369,7 @@
     /* ClevAgent timeline — condense left rail */
     .clev-timeline { grid-template-columns: 92px 1fr; gap: 10px; min-height: 300px; }
     .clev-session-label { font-size: 0.58rem; padding: 5px 9px 5px 7px; gap: 5px; }
-    .clev-session-label span:last-child { max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .clev-session-label .clev-session-suffix { display: none; }
     .clev-dot { width: 5px; height: 5px; }
     .clev-session-end { font-size: 0.56rem; }
     .clev-arrow { width: 14px; margin-left: -10px; }
@@ -1591,8 +1591,14 @@
 
     /* Products card */
     .product-card h2 { font-size: 1.3rem; line-height: 1.25; }               /* 20.8 */
-    .product-version { font-size: 0.72rem; letter-spacing: 0.04em; }          /* 11.5 */
-    .product-status { font-size: 0.72rem; }                                   /* 11.5 */
+    .product-version { font-size: 0.72rem; letter-spacing: 0.04em; white-space: nowrap; } /* 11.5 */
+    .product-status { font-size: 0.72rem; white-space: nowrap; }              /* 11.5 */
+
+    /* Stack product-name vertically on mobile so version sits below h2,
+       status stays aligned to top-right — prevents "v0.x · protocol" and
+       "Private beta" from wrapping at narrow widths */
+    .product-header { align-items: flex-start; }
+    .product-name { flex-direction: column; align-items: flex-start; gap: 4px; }
     .product-desc { font-size: 0.94rem; line-height: 1.65; }                  /* 15   */
     .product-features li { font-size: 0.78rem; line-height: 1.55; }           /* 12.5 */
     .product-card .product-cta { font-size: 0.88rem; }                        /* 14   */
@@ -1850,7 +1856,7 @@
             <div class="clev-session">
               <div class="clev-session-label">
                 <span class="clev-dot"></span>
-                <span>your agent · session open</span>
+                <span>your agent<span class="clev-session-suffix"> · session open</span></span>
               </div>
               <div class="clev-spine"></div>
               <div class="clev-session-end">
@@ -1976,7 +1982,7 @@
   <div class="shell">
     <div class="footer-inner">
       <div class="legal">
-        © 2026 SJK Systems, Inc. All rights reserved.<br>
+        © 2026 SJK Systems, Inc.<br>
         522 W Riverside Ave Ste N, Spokane, WA 99201
       </div>
       <div class="footer-mini">
