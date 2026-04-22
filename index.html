@@ -306,13 +306,13 @@
     .hero-logo { filter: invert(1) hue-rotate(180deg) brightness(0.22) contrast(1.1); }
   }
   .hero-tagline {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: clamp(2.3rem, 4.6vw, 3.4rem);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.035em;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(2.5rem, 5vw, 3.7rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
     color: var(--fg);
-    max-width: 20ch;
+    max-width: 22ch;
     margin-bottom: 28px;
   }
   .hero-tagline em {
@@ -417,7 +417,7 @@
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--fg);
-    margin-bottom: 20px;
+    margin-bottom: 36px;
     max-width: 22ch;
   }
 
@@ -1302,6 +1302,10 @@
   @media (max-width: 600px) {
     :root { --sec-gap: 96px; }
 
+    /* Last section before footer — tighten the pre-footer air */
+    section.block:last-of-type { padding-bottom: 48px; }
+    footer.footer { margin-top: 0; padding-top: 24px; }
+
     /* Top bar — keep brand + CTA, drop the rest */
     .topbar-inner { padding: 14px 20px; gap: 12px; }
     .brand-logo { height: 22px; }
@@ -1939,7 +1943,7 @@
         <div class="founder-name">Sean Kwon</div>
         <div class="founder-role">Founder &amp; CEO</div>
         <p class="founder-bio">
-          As someone who worked as an investment broker for most of his career, Sean sees ClevAgent as a trading system — where clients set up their agents and start working, with our logics acting like algo strategies. He also understands the importance of communication, which is why he built ForAgent: basically a Verizon for agents. The company is still in the early stage. Please reach out with any questions.
+          Sean spent most of his career as an investment broker, which shapes how he thinks about both products. ClevAgent follows a trading system analogy: clients sign in, set up their agents, and start working as traders would on a trading system. Our logics, in that same sense, map to the algo strategies in the system. ForAgent comes from the same instinct on the communications side, telecom for AI agents. The company is still in its early stage. Please feel free to reach out if you have any questions.
         </p>
       </div>
       <div class="contact-col reveal">
