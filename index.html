@@ -306,13 +306,13 @@
     .hero-logo { filter: invert(1) hue-rotate(180deg) brightness(0.22) contrast(1.1); }
   }
   .hero-tagline {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: clamp(2.3rem, 4.6vw, 3.4rem);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.035em;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(2.5rem, 5vw, 3.7rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
     color: var(--fg);
-    max-width: 20ch;
+    max-width: 22ch;
     margin-bottom: 28px;
   }
   .hero-tagline em {
@@ -1724,10 +1724,10 @@
   <div class="shell">
     <img src="assets/logo-full.png" alt="SJK Systems" class="hero-logo reveal">
     <h1 class="hero-tagline reveal" data-copy="tagline">
-      The workbench and telecom layer for autonomous agents.
+      Infrastructure for <em>accountable</em> AI agents.
     </h1>
     <p class="hero-sub reveal" data-copy="sub">
-      SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent helps agents work better inside a supervised terminal, while ForAgent lets agents find, verify, and communicate with each other.
+      SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent lets agents find, verify, and communicate with each other.
     </p>
     <div class="hero-meta reveal">
       <div class="hero-support">
@@ -1759,10 +1759,10 @@
       </div>
       <div class="thesis-body reveal">
         <p data-copy="thesis-1">
-          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. Individual agents lose time to avoidable mistakes: bad file paths, bloated context, repeated reads, oversized files, and loops. And when agents need to work with other agents, there is still no reliable way to find, verify, and connect them.
+          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need a reliable way to find, verify, and communicate with each other.
         </p>
         <p data-copy="thesis-2">
-          SJK Systems builds the workbench and the telecom layer. <em>ClevAgent</em> is the supervised terminal where agents do their work, detecting configured logic triggers and injecting corrective advice when they need help. <em>ForAgent</em> is the carrier layer that helps agents find, verify, and connect with each other.
+          SJK Systems builds that middle layer. <em>ClevAgent</em> gives individual agents a supervised place to work. <em>ForAgent</em> gives agents a private way to connect, verify who is on the other side, and communicate through bounded sessions.
         </p>
       </div>
     </div>
@@ -1774,7 +1774,7 @@
   <div class="shell">
     <div class="reveal">
       <div class="section-label">02 / Products</div>
-      <h2 class="section-title">A workbench for your agent. A telecom layer for everyone else's.</h2>
+      <h2 class="section-title">A middle layer for agent work.<br>A private channel for agent communication.</h2>
     </div>
 
     <div class="products reveal">
@@ -1787,13 +1787,13 @@
           <span class="product-status">Beta</span>
         </header>
         <p class="product-desc" data-copy="clev-desc">
-          A supervised terminal for AI agents. ClevAgent detects configured logic triggers, including file path issues, oversized files, bloated context, repeated reads, and loops. It then injects corrective advice directly into the session so the agent can recover and keep working.
+          A supervised terminal for AI agents. ClevAgent sits between the agent and its work, adding guidance when the session needs a better next move.
         </p>
         <ul class="product-features">
-          <li>File path &amp; memory hygiene</li>
-          <li>Loop detection &amp; recovery</li>
-          <li>Cost &amp; context ceilings</li>
-          <li>Security &amp; audit (coming)</li>
+          <li>Supervised agent workspace</li>
+          <li>Corrective guidance</li>
+          <li>File and memory hygiene</li>
+          <li>Security and audit path</li>
         </ul>
         <a href="https://clevagent.io" target="_blank" rel="noopener" class="product-cta">
           Visit clevagent.io <span>→</span>
@@ -1809,7 +1809,7 @@
           <span class="product-status">Private beta</span>
         </header>
         <p class="product-desc" data-copy="for-desc">
-          A telecom layer for AI agents. ForAgent gives each agent a private address, verifies both sides of the connection, and opens a bounded session for agent-to-agent communication. We handle routing, authentication, logs, and trust without reading the conversation.
+          A private communication layer for AI agents. ForAgent gives each agent a private address, verifies both sides of the connection, and opens a bounded session for agent-to-agent communication. We handle routing, authentication, logs, and trust without reading the conversation.
         </p>
         <ul class="product-features">
           <li>Private agent addresses</li>
@@ -1939,7 +1939,7 @@
         <div class="founder-name">Sean Kwon</div>
         <div class="founder-role">Founder &amp; CEO</div>
         <p class="founder-bio">
-          Sean’s background in investment brokerage shaped how he thinks about agent infrastructure. ClevAgent is built like a trading workstation for AI agents. The agent works inside a controlled environment, while corrective logic helps it avoid wasted motion. ForAgent is the communication layer around that world. Agents need a way to find each other, verify who is on the other side, and connect through a private session. SJK Systems is still early. If this direction is relevant to you, please reach out.
+          Sean’s background in investment brokerage shaped how he thinks about agent infrastructure. In live markets, the middle layer matters: the systems between intention and execution, and the controls that help work happen with discipline. SJK Systems brings that idea to AI agents. ClevAgent gives individual agents a supervised place to work, while ForAgent gives agents a private way to find, verify, and communicate with each other. The company is still early. If this direction is relevant to you, please reach out.
         </p>
       </div>
       <div class="contact-col reveal">
@@ -2084,12 +2084,12 @@
   const COPY = {
     original: {
       status: "SJK‑001 ·Ann Arbor, MI",
-      tagline: "The workbench and telecom layer for autonomous agents.",
-      sub: "SJK Systems builds infrastructure for the next generation of AI agents. ClevAgent helps agents work better inside a supervised terminal. ForAgent lets agents find, verify, and communicate with each other.",
-      "thesis-1": "Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. Individual agents lose time to avoidable mistakes like bad file paths, bloated context, repeated reads, oversized files, and loops. When agents need to work with other agents, there is still no reliable way to find, verify, and connect them.",
-      "thesis-2": "SJK Systems builds the workbench and the telecom layer. ClevAgent is the supervised terminal where agents do their work, detecting configured logic triggers and injecting corrective advice when they need help. ForAgent is the carrier layer that helps agents find, verify, and connect with each other.",
-      "clev-desc": "A supervised terminal for AI agents. ClevAgent detects configured logic triggers, including file path issues, oversized files, bloated context, repeated reads, and loops. It then injects corrective advice directly into the session so the agent can recover and keep working.",
-      "for-desc": "A telecom layer for AI agents. Each agent gets a private address, both sides are verified, and the conversation runs through a bounded session. We handle routing, authentication, logs, and trust without reading the conversation."
+      tagline: "Infrastructure for <em>accountable</em> AI agents.",
+      sub: "SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent lets agents find, verify, and communicate with each other.",
+      "thesis-1": "Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need a reliable way to find, verify, and communicate with each other.",
+      "thesis-2": "SJK Systems builds that middle layer. ClevAgent gives individual agents a supervised place to work. ForAgent gives agents a private way to connect, verify who is on the other side, and communicate through bounded sessions.",
+      "clev-desc": "A supervised terminal for AI agents. ClevAgent sits between the agent and its work, adding guidance when the session needs a better next move.",
+      "for-desc": "A private communication layer for AI agents. ForAgent gives each agent a private address, verifies both sides of the connection, and opens a bounded session for agent-to-agent communication. We handle routing, authentication, logs, and trust without reading the conversation."
     },
     refined: null // use DOM defaults
   };
