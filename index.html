@@ -6,8 +6,6 @@
 <title>SJK Systems, Inc. | Agent Workbench and Telecom Infrastructure</title>
 <meta name="description" content="SJK Systems builds AI agent infrastructure. ClevAgent is a supervised terminal for more efficient agent work. ForAgent is a telecom layer for private agent addresses, verification, and connection.">
 <link rel="canonical" href="https://sjksystems.com/">
-<link rel="icon" type="image/png" href="assets/favicon-light.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" href="assets/favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" href="assets/favicon-light.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
@@ -31,7 +29,7 @@
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "accentHue": 28,
     "density": "compact",
-    "heroBg": "warm-dark",
+    "heroBg": "warm-light",
     "copyMode": "refined",
     "showDiagramMotion": true
   }/*EDITMODE-END*/;
@@ -39,92 +37,66 @@
 
 <style>
   /* =========================================================
-     Tokens — warm neutrals, dual theme via prefers-color-scheme
+     Tokens — warm neutrals, fixed light theme
      ========================================================= */
   :root {
     --accent-hue: 28;         /* warm amber-ish by default; overridable */
     --accent-chroma: 0.09;
-    --accent-l: 0.72;
+    --accent-l: 0.58;
 
-    /* dark defaults */
-    --bg: #0a0808;
-    --bg-raise: #120f0d;
-    --bg-card: #16110e;
-    --bg-card-hover: #1c1612;
-    --line: #24201c;
-    --line-strong: #332d27;
+    --bg: #faf7f0;
+    --bg-raise: #f4efe5;
+    --bg-card: #ffffff;
+    --bg-card-hover: #fbf8f1;
+    --line: #e8e1d2;
+    --line-strong: #d8cfbd;
 
-    --fg: #f3eee3;
-    --fg-dim: #b8b0a3;
-    --fg-mute: #6e665c;
-    --fg-faint: #3e3830;
+    --fg: #1a1714;
+    --fg-dim: #4d4640;
+    --fg-mute: #8a8174;
+    --fg-faint: #b8b0a3;
 
     --accent: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue));
     --accent-soft: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.14);
     --accent-line: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.32);
 
-    --product-blue: oklch(0.78 0.08 240);
-    --product-blue-soft: oklch(0.78 0.08 240 / 0.12);
-    --product-blue-line: oklch(0.78 0.08 240 / 0.3);
+    --product-blue: oklch(0.5 0.1 240);
+    --product-blue-soft: oklch(0.5 0.1 240 / 0.08);
+    --product-blue-line: oklch(0.5 0.1 240 / 0.28);
 
-    --product-violet: oklch(0.78 0.08 300);
-    --product-violet-soft: oklch(0.78 0.08 300 / 0.12);
-    --product-violet-line: oklch(0.78 0.08 300 / 0.3);
+    --product-violet: oklch(0.5 0.1 300);
+    --product-violet-soft: oklch(0.5 0.1 300 / 0.08);
+    --product-violet-line: oklch(0.5 0.1 300 / 0.28);
 
     --radius-sm: 6px;
     --radius: 10px;
     --radius-lg: 14px;
 
     --shadow-sm: 0 1px 0 rgba(255,255,255,0.02) inset;
-    --shadow-card: 0 24px 60px -40px rgba(0,0,0,0.8);
+    --shadow-card: 0 24px 60px -45px rgba(60,40,10,0.25);
 
     --sec-gap: 120px;   /* comfortable */
-  }
-
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #faf7f0;
-      --bg-raise: #f4efe5;
-      --bg-card: #ffffff;
-      --bg-card-hover: #fbf8f1;
-      --line: #e8e1d2;
-      --line-strong: #d8cfbd;
-
-      --fg: #1a1714;
-      --fg-dim: #4d4640;
-      --fg-mute: #8a8174;
-      --fg-faint: #b8b0a3;
-
-      --accent-l: 0.58;
-
-      --product-blue: oklch(0.5 0.1 240);
-      --product-blue-soft: oklch(0.5 0.1 240 / 0.08);
-      --product-blue-line: oklch(0.5 0.1 240 / 0.28);
-
-      --product-violet: oklch(0.5 0.1 300);
-      --product-violet-soft: oklch(0.5 0.1 300 / 0.08);
-      --product-violet-line: oklch(0.5 0.1 300 / 0.28);
-
-      --shadow-card: 0 24px 60px -45px rgba(60,40,10,0.25);
-    }
+    --hero-copy-width: 35rem;
   }
 
   html[data-density="compact"]     { --sec-gap: 84px; }
   html[data-density="comfortable"] { --sec-gap: 120px; }
   html[data-density="spacious"]    { --sec-gap: 160px; }
 
-  html[data-hero-bg="pure"]       { --bg: #06040300; }
-  html[data-hero-bg="warm-dark"]  { /* default */ }
-  html[data-hero-bg="cool"] {
-    --bg: #07090c;
-    --bg-raise: #0c1014;
-    --bg-card: #10151a;
-    --line: #1d242b;
-    --line-strong: #2a333c;
+  html[data-hero-bg="pure"]       { --bg: #ffffff; }
+  html[data-hero-bg="warm-light"] { /* fixed light default */ }
+  html[data-hero-bg="cool"],
+  html[data-hero-bg="clean-light"] {
+    --bg: #f8f7f2;
+    --bg-raise: #f0ede4;
+    --bg-card: #ffffff;
+    --bg-card-hover: #fbf8f1;
+    --line: #e2dbc9;
+    --line-strong: #d2c9b5;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+  html { color-scheme: light; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
 
   body {
     font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -138,18 +110,15 @@
     font-feature-settings: "ss01", "cv11";
   }
 
-  /* Warm grain — subliminal, tuned per theme */
+  /* Warm grain — subliminal on the fixed light canvas */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.04;
+    opacity: 0.06;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.89 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  @media (prefers-color-scheme: light) {
-    body::before { opacity: 0.06; }
   }
 
   /* Hairline grid glow — very subtle radial at hero */
@@ -204,9 +173,7 @@
     height: 28px;
     width: auto;
     display: block;
-  }
-  @media (prefers-color-scheme: light) {
-    .brand-logo { filter: invert(1) hue-rotate(180deg) brightness(0.22) contrast(1.1); }
+    filter: invert(1) hue-rotate(180deg) brightness(0.22) contrast(1.1);
   }
   .nav-links {
     display: flex;
@@ -238,7 +205,7 @@
      ========================================================= */
   .hero {
     position: relative;
-    padding: 140px 0 100px;
+    padding: 140px 0 78px;
   }
   .shell { position: relative; z-index: 2; }
   .hero-status {
@@ -300,10 +267,7 @@
     width: 260px;
     margin: 28px 0 -44px -8px;
     display: block;
-  }
-  /* In light mode, the cream wordmark vanishes on cream bg — invert it. */
-  @media (prefers-color-scheme: light) {
-    .hero-logo { filter: invert(1) hue-rotate(180deg) brightness(0.22) contrast(1.1); }
+    filter: invert(1) hue-rotate(180deg) brightness(0.22) contrast(1.1);
   }
   .hero-tagline {
     font-family: 'EB Garamond', Georgia, serif;
@@ -342,12 +306,12 @@
     font-size: 1.08rem;
     line-height: 1.65;
     color: var(--fg-dim);
-    max-width: 56ch;
+    max-width: var(--hero-copy-width);
     margin-bottom: 48px;
   }
   .hero-meta {
     display: flex;
-    gap: 32px;
+    align-items: flex-start;
     flex-wrap: wrap;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 0.74rem;
@@ -355,40 +319,92 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
-  .hero-meta span { display: flex; align-items: center; gap: 8px; }
-  .hero-meta > span:not(.hero-meta-sep)::before {
+  .hero-support {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 17px;
+    width: min(100%, var(--hero-copy-width));
+  }
+  .hero-support-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .hero-support-label {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    color: var(--fg-mute);
+  }
+  .support-logos {
+    display: grid;
+    gap: 14px;
+    padding: 0;
+    margin-left: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .support-partner {
+    display: inline-grid;
+    gap: 8px;
+    align-items: start;
+    line-height: 1;
+  }
+  .support-logo {
+    display: block;
+    width: auto;
+    object-fit: contain;
+  }
+  .support-logo-ms {
+    height: 26px;
+  }
+  .support-logo-dd {
+    height: 34px;
+  }
+  .support-program {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #746c64;
+    white-space: nowrap;
+  }
+  .support-divider {
+    width: 42px;
+    height: 1px;
+    background: var(--line);
+    display: inline-block;
+  }
+  .hero-facts {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-top: 0;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    color: var(--fg-mute);
+  }
+  .hero-facts span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-facts span::before {
+    content: none;
+  }
+  .hero-facts span + span::before {
     content: "";
     width: 3px; height: 3px; border-radius: 50%;
     background: var(--fg-faint);
   }
-  .hero-meta-sep {
-    width: 1px;
-    height: 14px;
-    background: var(--line);
-    margin: 0 4px;
-  }
-  .hero-support {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .hero-support-label {
-    font-size: 0.66rem;
-    letter-spacing: 0.14em;
-    color: var(--fg-mute);
-  }
-  .hero-ms-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--fg);
-    text-transform: none;
-    letter-spacing: 0;
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 500;
-    font-size: 0.82rem;
-  }
-  .hero-ms-logo svg { flex: 0 0 auto; }
 
   /* =========================================================
      Section scaffolding
@@ -1288,7 +1304,7 @@
   }
   @media (max-width: 600px) {
     .shell, .topbar-inner { padding-left: 22px; padding-right: 22px; }
-    .hero { padding: 96px 0 72px; }
+    .hero { padding: 96px 0 60px; }
     .hero-logo { width: 200px; margin-bottom: -36px; }
     .backed-list { grid-template-columns: 1fr; }
     .diagram-wrap { padding: 32px 20px; }
@@ -1316,35 +1332,35 @@
     .shell, .topbar-inner { padding-left: 20px; padding-right: 20px; }
 
     /* Hero */
-    .hero { padding: 72px 0 56px; }
+    .hero { padding: 72px 0 46px; }
     .hero-logo { width: 160px; margin: 12px 0 -24px -4px; }
     .hero-tagline { font-size: clamp(1.75rem, 8.2vw, 2.2rem); letter-spacing: -0.028em; line-height: 1.12; margin-bottom: 22px; max-width: none; }
     .hero-sub { font-size: 0.98rem; line-height: 1.6; margin-bottom: 32px; }
     .hero-cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
     .hero-cta-row .btn, .hero-cta-row a { width: 100%; text-align: center; justify-content: center; }
 
-    /* Hero meta row — Supported by / Michigan C-Corp / Est. 2026 */
+    /* Hero meta row — support logos / Michigan C-Corp / Est. 2026 */
     .hero-meta {
-      gap: 10px 14px;
+      align-items: flex-start;
       font-size: 0.68rem;
       letter-spacing: 0.03em;
-      row-gap: 8px;
     }
-    .hero-support { gap: 8px; }
-    .hero-ms-logo { font-size: 0.78rem; gap: 6px; }
-    .hero-ms-logo svg { width: 12px; height: 12px; }
-    .hero-meta-sep { display: none; }
-    .hero-meta > span:not(.hero-meta-sep):not(.hero-ms-logo) {
-      position: relative;
-      padding-left: 14px;
-    }
-    .hero-meta > span:not(.hero-meta-sep):not(.hero-ms-logo)::before {
-      content: "·";
-      position: absolute;
-      left: 4px;
-      top: 50%;
-      transform: translateY(-52%);
-      color: var(--fg-faint);
+    .hero-support-head { gap: 16px; }
+    .hero-support-label, .hero-facts { font-size: 0.6rem; letter-spacing: 0.1em; }
+    .hero-support { gap: 13px; width: min(100%, var(--hero-copy-width)); }
+    .support-logos { gap: 10px; padding: 0; margin-left: 0; }
+    .support-logo-ms { height: 20px; }
+    .support-logo-dd { height: 27px; }
+    .support-partner { gap: 7px; }
+    .support-program { font-size: 0.54rem; letter-spacing: 0.1em; }
+    .support-divider { width: 36px; height: 1px; }
+    .hero-facts { gap: 12px; flex-wrap: nowrap; }
+    .hero-facts span + span::before { content: "·"; width: auto; height: auto; background: none; color: var(--fg-faint); }
+
+    @media (max-width: 360px) {
+      .hero-support-head { gap: 12px; }
+      .hero-support-label, .hero-facts { font-size: 0.54rem; letter-spacing: 0.08em; }
+      .hero-facts { gap: 9px; }
     }
 
     /* Section labels / titles */
@@ -1740,21 +1756,26 @@
       SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent lets agents find, verify, and communicate with each other.
     </p>
     <div class="hero-meta reveal">
-      <div class="hero-support">
-        <span class="hero-support-label">Supported by</span>
-        <span class="hero-ms-logo" aria-label="Microsoft Founders Hub">
-          <svg viewBox="0 0 23 23" width="14" height="14" aria-hidden="true">
-            <rect x="0"  y="0"  width="10" height="10" fill="#F25022"/>
-            <rect x="12" y="0"  width="10" height="10" fill="#7FBA00"/>
-            <rect x="0"  y="12" width="10" height="10" fill="#00A4EF"/>
-            <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
-          </svg>
-          <span class="hero-ms-text">Microsoft Founders Hub</span>
-        </span>
+      <div class="hero-support" aria-label="Supported by Microsoft Founders Hub and Datadog for Startups">
+        <div class="hero-support-head">
+          <span class="hero-support-label">Supported by</span>
+          <div class="hero-facts" aria-label="Company details">
+            <span>Michigan C-Corp</span>
+            <span>Est. 2026</span>
+          </div>
+        </div>
+        <div class="support-logos">
+          <span class="support-partner">
+            <img src="assets/microsoft-logo.png" alt="Microsoft" class="support-logo support-logo-ms" width="216" height="46">
+            <span class="support-program">Founders Hub</span>
+          </span>
+          <span class="support-divider" aria-hidden="true"></span>
+          <span class="support-partner">
+            <img src="assets/datadog-horizontal-purple.svg" alt="Datadog" class="support-logo support-logo-dd" width="800" height="203">
+            <span class="support-program">for Startups</span>
+          </span>
+        </div>
       </div>
-      <span class="hero-meta-sep" aria-hidden="true"></span>
-      <span>Michigan C-Corp</span>
-      <span>Est. 2026</span>
     </div>
   </div>
 </header>
@@ -2021,8 +2042,8 @@
   <div class="tweak-row">
     <label>Background tone</label>
     <div class="seg" id="bgSeg">
-      <button data-val="warm-dark" class="active">Warm</button>
-      <button data-val="cool">Cool</button>
+      <button data-val="warm-light" class="active">Warm</button>
+      <button data-val="clean-light">Clean</button>
     </div>
   </div>
   <div class="tweak-row">
@@ -2115,6 +2136,8 @@
 
   // -------- Tweaks state + persistence --------
   const state = Object.assign({}, TWEAK_DEFAULTS, JSON.parse(localStorage.getItem('sjk_tweaks') || '{}'));
+  if (state.heroBg === 'warm-dark') state.heroBg = 'warm-light';
+  if (state.heroBg === 'cool') state.heroBg = 'clean-light';
 
   function postEdit(edits) {
     try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*'); } catch {}
