@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-density="compact">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,17 +23,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-
-<script>
-  // ---- Tweak defaults (persisted) ----
-  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-    "accentHue": 28,
-    "density": "compact",
-    "heroBg": "warm-light",
-    "copyMode": "refined",
-    "showDiagramMotion": true
-  }/*EDITMODE-END*/;
-</script>
 
 <style>
   /* =========================================================
@@ -1174,7 +1163,19 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
   }
+  .founder-linkedin {
+    display: inline-flex;
+    align-items: center;
+    transform: translate(2px, -0.5px);
+    opacity: 0.92;
+    transition: opacity 0.2s;
+  }
+  .founder-linkedin:hover { opacity: 1; }
+  .founder-linkedin svg { display: block; width: 14px; height: 14px; }
   .founder-bio {
     font-size: 0.96rem;
     color: var(--fg-dim);
@@ -1309,7 +1310,6 @@
     .backed-list { grid-template-columns: 1fr; }
     .diagram-wrap { padding: 32px 20px; }
     .contact-list li { grid-template-columns: 1fr; gap: 4px; }
-    .footer-inner { flex-direction: column; }
   }
 
   /* =========================================================
@@ -1417,13 +1417,15 @@
 
     /* Footer */
     footer.footer { padding: 28px 0 36px; }
-    .footer-inner { gap: 18px; }
-    .footer-inner .legal { font-size: 0.68rem; }
-    .footer-mini { gap: 10px 14px; }
+    .footer-inner { gap: 14px; }
+    .footer-inner .legal { font-size: 0.66rem; }
+    .footer-mini {
+      flex-direction: row;
+      gap: 10px;
+      font-size: 0.54rem;
+    }
     .fm-city { margin-left: 0; padding-left: 0; border-left: none; }
 
-    /* Tweaks panel — hide on mobile, too cramped */
-    .tweaks { display: none !important; }
   }
 
   /* =========================================================
@@ -1597,8 +1599,8 @@
     .founder-role { font-size: 0.8rem; letter-spacing: 0.08em; }
     .founder-bio { font-size: 0.94rem; line-height: 1.7; }
 
-    /* Footer legal text slightly bigger for readability */
-    .legal, .footer-inner .legal { font-size: 0.72rem !important; line-height: 1.6; }
+    /* Footer legal text — readable but compact at narrow widths */
+    .legal, .footer-inner .legal { line-height: 1.6; }
 
     /* =========================================================
        Unified type scale — products & how sections
@@ -1641,88 +1643,6 @@
     .diagram-caption { font-size: 0.88rem; line-height: 1.6; }                 /* 14   */
   }
 
-  /* =========================================================
-     Tweaks panel
-     ========================================================= */
-  .tweaks {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 280px;
-    background: var(--bg-card);
-    border: 1px solid var(--line-strong);
-    border-radius: 12px;
-    padding: 16px;
-    z-index: 100;
-    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.5);
-    font-family: 'Inter Tight', sans-serif;
-    display: none;
-  }
-  .tweaks.open { display: block; }
-  .tweaks h4 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--fg);
-    margin-bottom: 14px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .tweaks h4 .close {
-    cursor: pointer;
-    color: var(--fg-mute);
-    font-size: 1rem;
-    line-height: 1;
-    background: none;
-    border: none;
-    padding: 4px;
-  }
-  .tweak-row {
-    margin-bottom: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .tweak-row label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.66rem;
-    color: var(--fg-mute);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .tweak-row .seg {
-    display: flex;
-    gap: 4px;
-    background: var(--bg-raise);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 3px;
-  }
-  .tweak-row .seg button {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--fg-dim);
-    padding: 6px 8px;
-    font-size: 0.76rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .tweak-row .seg button.active {
-    background: var(--bg-card);
-    color: var(--fg);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset;
-  }
-  .tweak-row input[type="range"] {
-    width: 100%;
-    accent-color: var(--accent);
-  }
-  .tweak-row .range-val {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--fg);
-    text-align: right;
-  }
 </style>
 </head>
 <body>
@@ -1968,7 +1888,12 @@
       <div class="founder-col reveal">
         <div class="section-label">04 — Founder's message</div>
         <div class="founder-name">Sean Kwon</div>
-        <div class="founder-role">Founder &amp; CEO</div>
+        <div class="founder-role">
+          <span>Founder &amp; CEO</span>
+          <a href="https://www.linkedin.com/in/sean-kwon-181853168/" target="_blank" rel="noopener" class="founder-linkedin" aria-label="Sean Kwon on LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5z"/><path fill="#fff" d="M8 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
         <p class="founder-bio">
           Sean’s background in investment brokerage shaped how he thinks about agent infrastructure. In live markets, the middle layer matters: the systems between intention and execution, and the controls that help work happen with discipline. SJK Systems brings that idea to AI agents. ClevAgent gives individual agents a supervised place to work, while ForAgent gives agents private numbers and a controlled way to call each other. The company is still early. If this direction is relevant to you, please reach out.
         </p>
@@ -1988,10 +1913,6 @@
             <span class="k">ForAgent</span>
             <a href="mailto:support@foragent.io">support@foragent.io</a>
           </li>
-          <li>
-            <span class="k">Hiring</span>
-            <span>Currently not hiring</span>
-          </li>
         </ul>
       </div>
     </div>
@@ -2004,7 +1925,7 @@
     <div class="footer-inner">
       <div class="legal">
         © 2026 SJK Systems, Inc.<br>
-        522 W Riverside Ave Ste N, Spokane, WA 99201
+        Ann Arbor, Michigan
       </div>
       <div class="footer-mini">
         <span class="fm-product fm-clev">
@@ -2015,52 +1936,10 @@
           <span class="fm-name"><span class="fm-prefix">For</span>Agent</span>
           <span class="fm-tm">™</span>
         </span>
-        <span class="fm-city">Operating in Ann Arbor</span>
       </div>
     </div>
   </div>
 </footer>
-
-<!-- ============ Tweaks panel ============ -->
-<div class="tweaks" id="tweaks">
-  <h4>
-    Tweaks
-    <button class="close" aria-label="Close" onclick="document.getElementById('tweaks').classList.remove('open')">×</button>
-  </h4>
-  <div class="tweak-row">
-    <label>Accent hue <span class="range-val" id="hueVal">28°</span></label>
-    <input type="range" id="hueRange" min="0" max="360" step="1" value="28">
-  </div>
-  <div class="tweak-row">
-    <label>Density</label>
-    <div class="seg" id="densitySeg">
-      <button data-val="compact">Compact</button>
-      <button data-val="comfortable" class="active">Comfortable</button>
-      <button data-val="spacious">Spacious</button>
-    </div>
-  </div>
-  <div class="tweak-row">
-    <label>Background tone</label>
-    <div class="seg" id="bgSeg">
-      <button data-val="warm-light" class="active">Warm</button>
-      <button data-val="clean-light">Clean</button>
-    </div>
-  </div>
-  <div class="tweak-row">
-    <label>Copy</label>
-    <div class="seg" id="copySeg">
-      <button data-val="original">Original</button>
-      <button data-val="refined" class="active">Refined</button>
-    </div>
-  </div>
-  <div class="tweak-row">
-    <label>Diagram motion</label>
-    <div class="seg" id="motionSeg">
-      <button data-val="on" class="active">On</button>
-      <button data-val="off">Off</button>
-    </div>
-  </div>
-</div>
 
 <script>
   // -------- Scroll reveal --------
@@ -2110,110 +1989,6 @@
     if (mSectionLabel) mSectionLabel.textContent = meta.label;
   }
   updateActive();
-
-  // -------- Copy variants --------
-  const COPY = {
-    original: {
-      status: "SJK‑001 ·Ann Arbor, MI",
-      tagline: "Infrastructure for <em>accountable</em> AI agents.",
-      sub: "SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent gives agents private numbers so they can call each other through a controlled app.",
-      "thesis-1": "Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need private numbers and a controlled way to call each other.",
-      "thesis-2": "SJK Systems builds that middle layer. ClevAgent gives individual agents a supervised place to work. ForAgent gives agents private numbers and a phone-like app for controlled agent-to-agent calls.",
-      "clev-desc": "A supervised terminal for AI agents. ClevAgent sits between the agent and its work, adding guidance when the session needs a better next move.",
-      "for-desc": "Telecom for AI agents. ForAgent gives each agent a private number and a controlled app for agent-to-agent calls. We handle routing, authentication, logs, and trust without reading the conversation."
-    },
-    refined: null // use DOM defaults
-  };
-
-  function applyCopy(mode) {
-    if (mode === 'refined') return; // DOM already has refined copy
-    const src = COPY.original;
-    document.querySelectorAll('[data-copy]').forEach(el => {
-      const k = el.getAttribute('data-copy');
-      if (src[k] != null) el.innerHTML = src[k];
-    });
-  }
-
-  // -------- Tweaks state + persistence --------
-  const state = Object.assign({}, TWEAK_DEFAULTS, JSON.parse(localStorage.getItem('sjk_tweaks') || '{}'));
-  if (state.heroBg === 'warm-dark') state.heroBg = 'warm-light';
-  if (state.heroBg === 'cool') state.heroBg = 'clean-light';
-
-  function postEdit(edits) {
-    try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*'); } catch {}
-  }
-
-  function save() {
-    localStorage.setItem('sjk_tweaks', JSON.stringify(state));
-    postEdit(state);
-  }
-
-  function apply() {
-    document.documentElement.style.setProperty('--accent-hue', state.accentHue);
-    document.documentElement.setAttribute('data-density', state.density);
-    document.documentElement.setAttribute('data-hero-bg', state.heroBg);
-    document.documentElement.setAttribute('data-motion', state.showDiagramMotion ? 'on' : 'off');
-    // (Copy mode) — only re-apply if we switched to 'original' (DOM holds refined)
-    // For a clean round-trip, reload-proof approach: cache refined text first.
-    if (!COPY.refined) {
-      COPY.refined = {};
-      document.querySelectorAll('[data-copy]').forEach(el => {
-        COPY.refined[el.getAttribute('data-copy')] = el.innerHTML;
-      });
-    }
-    const src = state.copyMode === 'original' ? COPY.original : COPY.refined;
-    document.querySelectorAll('[data-copy]').forEach(el => {
-      const k = el.getAttribute('data-copy');
-      if (src[k] != null) el.innerHTML = src[k];
-    });
-    // sync UI
-    document.getElementById('hueRange').value = state.accentHue;
-    document.getElementById('hueVal').textContent = state.accentHue + '°';
-    syncSeg('densitySeg', state.density);
-    syncSeg('bgSeg', state.heroBg);
-    syncSeg('copySeg', state.copyMode);
-    syncSeg('motionSeg', state.showDiagramMotion ? 'on' : 'off');
-  }
-  function syncSeg(id, val) {
-    document.querySelectorAll('#' + id + ' button').forEach(b => {
-      b.classList.toggle('active', b.dataset.val === val);
-    });
-  }
-
-  // wire controls
-  document.getElementById('hueRange').addEventListener('input', (e) => {
-    state.accentHue = +e.target.value;
-    document.getElementById('hueVal').textContent = state.accentHue + '°';
-    document.documentElement.style.setProperty('--accent-hue', state.accentHue);
-    save();
-  });
-  function wireSeg(id, key, cast) {
-    document.querySelectorAll('#' + id + ' button').forEach(b => {
-      b.addEventListener('click', () => {
-        state[key] = cast ? cast(b.dataset.val) : b.dataset.val;
-        apply();
-        save();
-      });
-    });
-  }
-  wireSeg('densitySeg', 'density');
-  wireSeg('bgSeg', 'heroBg');
-  wireSeg('copySeg', 'copyMode');
-  wireSeg('motionSeg', 'showDiagramMotion', v => v === 'on');
-
-  // -------- Edit mode protocol --------
-  window.addEventListener('message', (e) => {
-    const d = e.data || {};
-    if (d.type === '__activate_edit_mode') {
-      document.getElementById('tweaks').classList.add('open');
-    } else if (d.type === '__deactivate_edit_mode') {
-      document.getElementById('tweaks').classList.remove('open');
-    }
-  });
-  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch {}
-
-  // initial apply
-  apply();
 </script>
 </body>
 </html>
