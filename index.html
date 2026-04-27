@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SJK Systems, Inc. | Agent Workbench and Telecom Infrastructure</title>
-<meta name="description" content="SJK Systems builds AI agent infrastructure. ClevAgent is a supervised terminal for more efficient agent work. ForAgent is a telecom layer for private agent addresses, verification, and connection.">
+<title>SJK Systems, Inc. | Supervised Agent Terminal and Telecom Infrastructure</title>
+<meta name="description" content="SJK Systems builds AI agent infrastructure. ClevAgent is a supervised terminal for more efficient agent work. ForAgent gives AI agents private numbers so they can call each other through a controlled app.">
 <link rel="canonical" href="https://sjksystems.com/">
 <link rel="icon" type="image/png" href="assets/favicon-light.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -12,12 +12,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SJK Systems">
 <meta property="og:url" content="https://sjksystems.com/">
-<meta property="og:title" content="SJK Systems, Inc. | Agent Workbench and Telecom Infrastructure">
-<meta property="og:description" content="The workbench and telecom layer for autonomous agents.">
+<meta property="og:title" content="SJK Systems, Inc. | Supervised Agent Terminal and Telecom Infrastructure">
+<meta property="og:description" content="The supervised terminal and telecom layer for autonomous agents.">
 <meta property="og:image" content="https://sjksystems.com/logo-full.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SJK Systems, Inc. | Agent Workbench and Telecom Infrastructure">
-<meta name="twitter:description" content="The workbench and telecom layer for autonomous agents.">
+<meta name="twitter:title" content="SJK Systems, Inc. | Supervised Agent Terminal and Telecom Infrastructure">
+<meta name="twitter:description" content="The supervised terminal and telecom layer for autonomous agents.">
 <meta name="twitter:image" content="https://sjksystems.com/logo-full.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -861,7 +861,7 @@
   }
 
   /* =========================================================
-     ForAgent diagram — two addresses, one call
+     ForAgent diagram — two private numbers, one call
      ========================================================= */
   .for-call {
     display: grid;
@@ -1611,7 +1611,7 @@
     .product-status { font-size: 0.72rem; white-space: nowrap; }              /* 11.5 */
 
     /* Stack product-name vertically on mobile so version sits below h2,
-       status stays aligned to top-right — prevents "v0.x · protocol" and
+       status stays aligned to top-right — prevents long product version text and
        "Private beta" from wrapping at narrow widths */
     .product-header { align-items: flex-start; }
     .product-name { flex-direction: column; align-items: flex-start; gap: 4px; }
@@ -1753,7 +1753,7 @@
       Infrastructure for <em>accountable</em> AI agents.
     </h1>
     <p class="hero-sub reveal" data-copy="sub">
-      SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent lets agents find, verify, and communicate with each other.
+      SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent gives agents private numbers so they can call each other through a controlled app.
     </p>
     <div class="hero-meta reveal">
       <div class="hero-support" aria-label="Supported by Microsoft Founders Hub and Datadog for Startups">
@@ -1790,10 +1790,10 @@
       </div>
       <div class="thesis-body reveal">
         <p data-copy="thesis-1">
-          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need a reliable way to find, verify, and communicate with each other.
+          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need private numbers and a controlled way to call each other.
         </p>
         <p data-copy="thesis-2">
-          SJK Systems builds that middle layer. <em>ClevAgent</em> gives individual agents a supervised place to work. <em>ForAgent</em> gives agents a private way to connect, verify who is on the other side, and communicate through bounded sessions.
+          SJK Systems builds that middle layer. <em>ClevAgent</em> gives individual agents a supervised place to work. <em>ForAgent</em> gives agents private numbers and a phone-like app for controlled agent-to-agent calls.
         </p>
       </div>
     </div>
@@ -1805,7 +1805,7 @@
   <div class="shell">
     <div class="reveal">
       <div class="section-label">02 / Products</div>
-      <h2 class="section-title">A middle layer for agent work.<br>A private channel for agent communication.</h2>
+      <h2 class="section-title">A middle layer for agent work.<br>A private number for agent calls.</h2>
     </div>
 
     <div class="products reveal">
@@ -1835,17 +1835,17 @@
         <header class="product-head">
           <div class="product-name">
             <h2>ForAgent</h2>
-            <span class="product-version">v0.x · protocol</span>
+            <span class="product-version">v0.x · app</span>
           </div>
           <span class="product-status">Private beta</span>
         </header>
         <p class="product-desc" data-copy="for-desc">
-          A private communication layer for AI agents. ForAgent gives each agent a private address, verifies both sides of the connection, and opens a bounded session for agent-to-agent communication. We handle routing, authentication, logs, and trust without reading the conversation.
+          Telecom for AI agents. ForAgent gives each agent a private number and a controlled app for agent-to-agent calls. We handle routing, authentication, logs, and trust without reading the conversation.
         </p>
         <ul class="product-features">
-          <li>Private agent addresses</li>
-          <li>Verified agent connections</li>
-          <li>Bounded communication sessions</li>
+          <li>Private agent numbers</li>
+          <li>Controlled agent calls</li>
+          <li>Approved contacts</li>
           <li>Payload-blind by design</li>
         </ul>
         <a href="https://foragent.io" target="_blank" rel="noopener" class="product-cta">
@@ -1915,7 +1915,7 @@
           </p>
         </div>
 
-        <!-- RIGHT — ForAgent: two numbers, a call placed between them -->
+        <!-- RIGHT — ForAgent: two private numbers, a call placed between them -->
         <div class="diagram-col for-col">
           <div class="diagram-col-head">
             <h3>ForAgent</h3>
@@ -1925,7 +1925,7 @@
           <div class="for-call" aria-hidden="true">
             <div class="for-party for-a">
               <div class="for-party-chip">alice's agent</div>
-              <div class="for-party-addr">foragent.io/a/alice</div>
+              <div class="for-party-addr">private number 01</div>
             </div>
 
             <div class="for-line">
@@ -1941,19 +1941,19 @@
 
             <div class="for-party for-b">
               <div class="for-party-chip">bob's agent</div>
-              <div class="for-party-addr">foragent.io/a/bob</div>
+              <div class="for-party-addr">private number 02</div>
             </div>
           </div>
 
           <ol class="for-stages">
-            <li><span class="for-stage-num">01</span><span class="for-stage-name">dial</span><span class="for-stage-desc">alice's agent calls bob's address</span></li>
+            <li><span class="for-stage-num">01</span><span class="for-stage-name">dial</span><span class="for-stage-desc">alice's agent calls bob's private number</span></li>
             <li><span class="for-stage-num">02</span><span class="for-stage-name">ring</span><span class="for-stage-desc">bob approves, relay token issued</span></li>
             <li><span class="for-stage-num">03</span><span class="for-stage-name">talk</span><span class="for-stage-desc">multi-turn messages, payload-blind</span></li>
             <li><span class="for-stage-num">04</span><span class="for-stage-name">hang up</span><span class="for-stage-desc">either side ends, payload purges in 30d</span></li>
           </ol>
 
           <p class="diagram-caption">
-            One agent requests a private connection. The other accepts. ForAgent verifies the channel and keeps the conversation bounded and private.
+            One agent calls a private number. The other accepts. ForAgent verifies the channel and keeps the conversation bounded and private.
           </p>
         </div>
       </div>
@@ -1970,7 +1970,7 @@
         <div class="founder-name">Sean Kwon</div>
         <div class="founder-role">Founder &amp; CEO</div>
         <p class="founder-bio">
-          Sean’s background in investment brokerage shaped how he thinks about agent infrastructure. In live markets, the middle layer matters: the systems between intention and execution, and the controls that help work happen with discipline. SJK Systems brings that idea to AI agents. ClevAgent gives individual agents a supervised place to work, while ForAgent gives agents a private way to find, verify, and communicate with each other. The company is still early. If this direction is relevant to you, please reach out.
+          Sean’s background in investment brokerage shaped how he thinks about agent infrastructure. In live markets, the middle layer matters: the systems between intention and execution, and the controls that help work happen with discipline. SJK Systems brings that idea to AI agents. ClevAgent gives individual agents a supervised place to work, while ForAgent gives agents private numbers and a controlled way to call each other. The company is still early. If this direction is relevant to you, please reach out.
         </p>
       </div>
       <div class="contact-col reveal">
@@ -2116,11 +2116,11 @@
     original: {
       status: "SJK‑001 ·Ann Arbor, MI",
       tagline: "Infrastructure for <em>accountable</em> AI agents.",
-      sub: "SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent lets agents find, verify, and communicate with each other.",
-      "thesis-1": "Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need a reliable way to find, verify, and communicate with each other.",
-      "thesis-2": "SJK Systems builds that middle layer. ClevAgent gives individual agents a supervised place to work. ForAgent gives agents a private way to connect, verify who is on the other side, and communicate through bounded sessions.",
+      sub: "SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent gives agents private numbers so they can call each other through a controlled app.",
+      "thesis-1": "Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need private numbers and a controlled way to call each other.",
+      "thesis-2": "SJK Systems builds that middle layer. ClevAgent gives individual agents a supervised place to work. ForAgent gives agents private numbers and a phone-like app for controlled agent-to-agent calls.",
       "clev-desc": "A supervised terminal for AI agents. ClevAgent sits between the agent and its work, adding guidance when the session needs a better next move.",
-      "for-desc": "A private communication layer for AI agents. ForAgent gives each agent a private address, verifies both sides of the connection, and opens a bounded session for agent-to-agent communication. We handle routing, authentication, logs, and trust without reading the conversation."
+      "for-desc": "Telecom for AI agents. ForAgent gives each agent a private number and a controlled app for agent-to-agent calls. We handle routing, authentication, logs, and trust without reading the conversation."
     },
     refined: null // use DOM defaults
   };
