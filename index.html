@@ -332,8 +332,11 @@
     color: var(--fg-mute);
   }
   .support-logos {
-    display: grid;
-    gap: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 18px;
     padding: 0;
     margin-left: 0;
     border: none;
@@ -357,6 +360,9 @@
   .support-logo-dd {
     height: 34px;
   }
+  .support-logo-gfs {
+    height: 32px;
+  }
   .support-program {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.58rem;
@@ -366,15 +372,17 @@
     white-space: nowrap;
   }
   .support-divider {
-    width: 42px;
-    height: 1px;
+    width: 1px;
+    height: 32px;
     background: var(--line);
     display: inline-block;
+    align-self: center;
   }
   .hero-facts {
     display: flex;
     align-items: center;
     gap: 18px;
+    margin-top: 30px;
     padding-top: 0;
     font-size: 0.66rem;
     letter-spacing: 0.14em;
@@ -1348,12 +1356,13 @@
     .hero-support-head { gap: 16px; }
     .hero-support-label, .hero-facts { font-size: 0.6rem; letter-spacing: 0.1em; }
     .hero-support { gap: 13px; width: min(100%, var(--hero-copy-width)); }
-    .support-logos { gap: 10px; padding: 0; margin-left: 0; }
+    .support-logos { gap: 14px; padding: 0; margin-left: 0; }
     .support-logo-ms { height: 20px; }
     .support-logo-dd { height: 27px; }
+    .support-logo-gfs { height: 24px; }
     .support-partner { gap: 7px; }
     .support-program { font-size: 0.54rem; letter-spacing: 0.1em; }
-    .support-divider { width: 36px; height: 1px; }
+    .support-divider { width: 1px; height: 24px; }
     .hero-facts { gap: 12px; flex-wrap: nowrap; }
     .hero-facts span + span::before { content: "·"; width: auto; height: auto; background: none; color: var(--fg-faint); }
 
@@ -1676,14 +1685,8 @@
       SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent gives agents private numbers so they can call each other through a controlled app.
     </p>
     <div class="hero-meta reveal">
-      <div class="hero-support" aria-label="Supported by Microsoft Founders Hub and Datadog for Startups">
-        <div class="hero-support-head">
-          <span class="hero-support-label">Supported by</span>
-          <div class="hero-facts" aria-label="Company details">
-            <span>Michigan C-Corp</span>
-            <span>Est. 2026</span>
-          </div>
-        </div>
+      <div class="hero-support" aria-label="Supported by Microsoft Founders Hub, Datadog for Startups, and Google for Startups">
+        <span class="hero-support-label">Supported by</span>
         <div class="support-logos">
           <span class="support-partner">
             <img src="assets/microsoft-logo.png" alt="Microsoft" class="support-logo support-logo-ms" width="216" height="46">
@@ -1694,6 +1697,15 @@
             <img src="assets/datadog-horizontal-purple.svg" alt="Datadog" class="support-logo support-logo-dd" width="800" height="203">
             <span class="support-program">for Startups</span>
           </span>
+          <span class="support-divider" aria-hidden="true"></span>
+          <span class="support-partner">
+            <img src="assets/google-logo.webp" alt="Google" class="support-logo support-logo-gfs" width="2499" height="819">
+            <span class="support-program">for Startups</span>
+          </span>
+        </div>
+        <div class="hero-facts" aria-label="Company details">
+          <span>Michigan C-Corp</span>
+          <span>Est. 2026</span>
         </div>
       </div>
     </div>
