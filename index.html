@@ -1240,18 +1240,24 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-left: 0;
-      margin-top: 20px;
-      margin-bottom: 4px;
-      height: auto;
+      margin-left: -14px; /* Shift leftward on mobile for tight side-by-side integration */
+      margin-top: 0;
+      margin-bottom: 0;
+      height: 100%;
     }
     .robot-illust-img {
-      max-height: 105px;
-      top: 0 !important; /* Reset desktop top offset for clean vertical centering */
+      max-height: 96px; /* Compact scale for elegant mobile side-by-side */
+      top: 0 !important; /* Reset desktop top offset */
     }
     .robot-illust-img.foragent-phone {
-      max-height: 115px;
-      top: 0 !important; /* Reset desktop top offset for clean vertical centering */
+      max-height: 105px; /* Compact scale for elegant mobile side-by-side */
+      top: 6px !important; /* Tiny top offset to center phone next to specs list */
+    }
+    .product-features-wrap {
+      grid-template-columns: 1.25fr 0.75fr; /* Keep side-by-side layout even on mobile */
+      min-height: auto;
+      gap: 8px;
+      padding-top: 16px;
     }
     .product-card .product-cta {
       display: inline-flex;
