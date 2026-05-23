@@ -49,13 +49,13 @@
     --accent-soft: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.14);
     --accent-line: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.32);
 
-    --product-blue: oklch(0.5 0.1 240);
-    --product-blue-soft: oklch(0.5 0.1 240 / 0.08);
-    --product-blue-line: oklch(0.5 0.1 240 / 0.28);
+    --product-blue: oklch(0.546 0.245 262.881); /* Exact ClevAgent blue (#2563EB) */
+    --product-blue-soft: oklch(0.546 0.245 262.881 / 0.08);
+    --product-blue-line: oklch(0.546 0.245 262.881 / 0.28);
 
-    --product-violet: oklch(0.5 0.1 300);
-    --product-violet-soft: oklch(0.5 0.1 300 / 0.08);
-    --product-violet-line: oklch(0.5 0.1 300 / 0.28);
+    --product-violet: oklch(0.538 0.231 294.673); /* Exact ForAgent violet (#7c3aed) */
+    --product-violet-soft: oklch(0.538 0.231 294.673 / 0.08);
+    --product-violet-line: oklch(0.538 0.231 294.673 / 0.28);
 
     --radius-sm: 6px;
     --radius: 10px;
@@ -505,15 +505,38 @@
     opacity: 0.85;
     pointer-events: none;
   }
-  .product-card.clevagent { --card-accent: var(--product-blue); }
-  .product-card.foragent  { --card-accent: var(--product-violet); }
+  .product-card.clevagent {
+    --card-accent: var(--product-blue);
+    /* Soft ClevAgent brand-tinted resting shadow */
+    box-shadow:
+      0 12px 32px -16px color-mix(in oklab, var(--product-blue) 12%, rgba(0, 0, 0, 0.08)),
+      0 2px 8px -4px color-mix(in oklab, var(--product-blue) 4%, rgba(0, 0, 0, 0.02));
+  }
+  .product-card.foragent {
+    --card-accent: var(--product-violet);
+    /* Soft ForAgent brand-tinted resting shadow */
+    box-shadow:
+      0 12px 32px -16px color-mix(in oklab, var(--product-violet) 12%, rgba(0, 0, 0, 0.08)),
+      0 2px 8px -4px color-mix(in oklab, var(--product-violet) 4%, rgba(0, 0, 0, 0.02));
+  }
 
   .product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-card);
+    transform: translateY(-4px);
   }
-  .product-card.clevagent:hover { border-color: color-mix(in oklab, var(--product-blue) 35%, var(--line)); }
-  .product-card.foragent:hover  { border-color: color-mix(in oklab, var(--product-violet) 35%, var(--line)); }
+  .product-card.clevagent:hover {
+    border-color: color-mix(in oklab, var(--product-blue) 35%, var(--line));
+    /* High-diffusion expanded blue shadow on hover */
+    box-shadow:
+      0 38px 80px -28px color-mix(in oklab, var(--product-blue) 22%, rgba(0, 0, 0, 0.15)),
+      0 6px 20px -8px color-mix(in oklab, var(--product-blue) 10%, rgba(0, 0, 0, 0.04));
+  }
+  .product-card.foragent:hover {
+    border-color: color-mix(in oklab, var(--product-violet) 35%, var(--line));
+    /* High-diffusion expanded violet shadow on hover */
+    box-shadow:
+      0 38px 80px -28px color-mix(in oklab, var(--product-violet) 22%, rgba(0, 0, 0, 0.15)),
+      0 6px 20px -8px color-mix(in oklab, var(--product-violet) 10%, rgba(0, 0, 0, 0.04));
+  }
 
   .product-head {
     display: flex;
@@ -533,31 +556,19 @@
     letter-spacing: -0.015em;
     color: var(--fg);
   }
-  .product-version {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--fg-mute);
-    letter-spacing: 0.04em;
+  .product-card h2 .brand-agent {
+    color: var(--card-accent);
   }
-  .product-status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--fg-dim);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    display: flex; align-items: center; gap: 8px;
+  .product-logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    flex: 0 0 auto;
   }
-  .product-status::before {
-    content: "";
-    width: 6px; height: 6px; border-radius: 50%;
-    background: oklch(0.74 0.14 150);
-    box-shadow: 0 0 0 3px oklch(0.74 0.14 150 / 0.18);
+  .product-card.clevagent .product-logo {
+    width: 48px;
+    height: 48px;
   }
-  .product-card.foragent .product-status::before {
-    background: oklch(0.78 0.13 85);
-    box-shadow: 0 0 0 3px oklch(0.78 0.13 85 / 0.18);
-  }
-
   .product-desc {
     font-size: 0.96rem;
     color: var(--fg-dim);
@@ -566,537 +577,179 @@
     max-width: 44ch;
   }
 
+  .product-features-wrap {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in oklab, var(--line) 45%, transparent);
+    position: relative;
+    min-height: 165px;
+  }
   .product-features {
     list-style: none;
-    display: grid;
-    gap: 8px;
-    margin-bottom: 26px;
-    padding-top: 18px;
-    border-top: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Spacious vertical gaps instead of technical borders */
+  }
+  .product-robot-illust {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    pointer-events: none;
+    margin-left: -48px; /* Shift both slightly to the left for better visual integration */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .product-card.clevagent:hover .product-robot-illust {
+    transform: scale(1.06) rotate(1deg);
+  }
+  .product-card.foragent:hover .product-robot-illust {
+    transform: scale(1.06) rotate(-2deg);
+  }
+  .robot-illust-img {
+    position: relative;
+    top: 24px; /* Shift robot slightly downward */
+    max-height: 135px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.05));
+    animation: robot-float 3s ease-in-out infinite;
+    transition: filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .product-card.clevagent:hover .robot-illust-img {
+    filter: drop-shadow(0 12px 32px color-mix(in oklab, var(--card-accent) 15%, rgba(0, 0, 0, 0.08)));
+  }
+  .robot-illust-img.foragent-phone {
+    position: relative;
+    top: 24px; /* Shift phone slightly downward */
+    max-height: 165px;
+    filter: drop-shadow(0 10px 24px rgba(139, 92, 246, 0.06));
+    animation: phone-ring 3.5s ease-in-out infinite;
+  }
+  .product-card.foragent:hover .robot-illust-img.foragent-phone {
+    filter: drop-shadow(0 14px 32px color-mix(in oklab, var(--card-accent) 18%, rgba(0, 0, 0, 0.08)));
+  }
+  @keyframes robot-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  @keyframes phone-ring {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    /* Rhythmic ring pulse 1 */
+    12% { transform: translateX(-2.5px) rotate(-1.8deg); }
+    16% { transform: translateX(2.5px) rotate(1.8deg); }
+    20% { transform: translateX(-2px) rotate(-1.2deg); }
+    24% { transform: translateX(2px) rotate(1.2deg); }
+    28% { transform: translateX(-1px) rotate(-0.6deg); }
+    32% { transform: translateX(1px) rotate(0.6deg); }
+    36%, 60% { transform: translateX(0) translateY(0) rotate(0deg); }
+    /* Rhythmic ring pulse 2 */
+    68% { transform: translateX(-2.5px) rotate(-1.8deg); }
+    72% { transform: translateX(2.5px) rotate(1.8deg); }
+    76% { transform: translateX(-2px) rotate(-1.2deg); }
+    80% { transform: translateX(2px) rotate(1.2deg); }
+    84% { transform: translateX(-1px) rotate(-0.6deg); }
+    88% { transform: translateX(1px) rotate(0.6deg); }
   }
   .product-features li {
-    display: flex; gap: 10px; align-items: flex-start;
-    font-size: 0.88rem;
-    color: var(--fg-dim);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: -0.005em;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 0.88rem; /* Premium sans-serif for high-end editorial look */
+    font-weight: 400;
+    color: var(--fg-mute); /* Resting state is softer to let typography breathe */
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+    transition: color 0.35s ease;
+  }
+  .product-card:hover .product-features li {
+    color: var(--fg-dim); /* Transitions to dark gray on card hover */
   }
   .product-features li::before {
     content: "→";
-    color: var(--fg-mute);
+    color: var(--fg-faint);
     flex: 0 0 auto;
-    margin-top: 1px;
+    margin-top: 2px; /* Perfect visual center alignment for sans-serif */
+    transition: color 0.4s cubic-bezier(0.2, 0.6, 0.2, 1),
+                transform 0.4s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .product-card:hover .product-features li::before {
+    color: var(--card-accent); /* Soft brand accent highlight */
+    transform: translateX(3px); /* Elegant micro-slide */
   }
 
   .product-cta {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    color: var(--fg);
+    justify-content: center;
+    gap: 6px;
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-bottom: 1px solid var(--line-strong);
-    padding-bottom: 3px;
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.82rem; /* Micro-scaled precision ticket look */
+    font-weight: 600;
     white-space: nowrap;
-    transition: border-color 0.2s, color 0.2s, gap 0.2s;
-  }
-  .product-cta:hover { gap: 12px; }
-  .product-card.clevagent .product-cta { color: var(--product-blue); border-bottom-color: var(--product-blue-line); }
-  .product-card.foragent  .product-cta { color: var(--product-violet); border-bottom-color: var(--product-violet-line); }
-  .product-card.clevagent .product-cta:hover { border-bottom-color: var(--product-blue); }
-  .product-card.foragent  .product-cta:hover { border-bottom-color: var(--product-violet); }
 
-  /* =========================================================
-     How it works — diagram
-     ========================================================= */
-  .diagram-wrap {
-    margin-top: 32px;
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 48px 40px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  .diagram-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
-  }
-  .diagram-col {
-    position: relative;
-  }
-  .diagram-col:first-child { padding-right: 24px; border-right: 1px dashed var(--line); }
-  .diagram-col:last-child  { padding-left: 24px; }
-  .diagram-col-head {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-  .diagram-col-head h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 1.15rem;
-    color: var(--fg);
-    letter-spacing: -0.01em;
-  }
-  .diagram-col-head .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--fg-mute);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .flow {
-    position: relative;
-    height: 180px;
-  }
-  .flow svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-  .node {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--fg-dim);
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-  }
-  .node .chip {
-    min-width: 90px;
-    padding: 9px 14px;
-    background: var(--bg-raise);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-sm);
-    text-align: center;
-    color: var(--fg);
-    font-size: 0.78rem;
-    font-weight: 500;
-  }
-  .node.center .chip {
-    background: var(--accent-soft);
-    border-color: var(--accent-line);
-    color: var(--fg);
-  }
-  .node.clev .chip   { background: var(--product-blue-soft); border-color: var(--product-blue-line); color: var(--product-blue); font-family: 'Fraunces', serif; font-weight: 500; font-size: 0.95rem; padding: 11px 16px; }
-  .node.foragent .chip { background: var(--product-violet-soft); border-color: var(--product-violet-line); color: var(--product-violet); font-family: 'Fraunces', serif; font-weight: 500; font-size: 0.95rem; padding: 11px 16px; }
-  .node .label { color: var(--fg-mute); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; }
-
-  /* ClevAgent layout: Agent — [ClevAgent] — Model, stacked: cost/pace/direction */
-  .flow.clev .node.agent  { left: 0;    top: 50%; transform: translateY(-50%); }
-  .flow.clev .node.clev   { left: 50%;  top: 50%; transform: translate(-50%, -50%); }
-  .flow.clev .node.model  { right: 0;   top: 50%; transform: translateY(-50%); }
-
-  /* ForAgent layout: userA-agent — [ForAgent relay] — userB-agent */
-  .flow.foragent .node.userA { left: 0;    top: 50%; transform: translateY(-50%); }
-  .flow.foragent .node.relay { left: 50%;  top: 50%; transform: translate(-50%, -50%); }
-  .flow.foragent .node.userB { right: 0;   top: 50%; transform: translateY(-50%); }
-
-  .diagram-caption {
-    margin-top: 20px;
-    font-size: 0.88rem;
-    color: var(--fg-dim);
-    line-height: 1.6;
-    max-width: 44ch;
-  }
-
-  /* Animated flow dots */
-  @keyframes flowDash {
-    to { stroke-dashoffset: -24; }
-  }
-  .flow-line {
-    stroke: var(--line-strong);
-    stroke-width: 1;
-    fill: none;
-  }
-  .flow-line.active {
-    stroke-dasharray: 3 5;
-    animation: flowDash 1.6s linear infinite;
-  }
-  .flow.clev .flow-line.active     { stroke: color-mix(in oklab, var(--product-blue) 60%, transparent); }
-  .flow.foragent .flow-line.active { stroke: color-mix(in oklab, var(--product-violet) 60%, transparent); }
-
-  html[data-motion="off"] .flow-line.active { animation: none; }
-
-  /* =========================================================
-     ClevAgent diagram — vertical session timeline w/ interventions
-     ========================================================= */
-  .clev-timeline {
-    position: relative;
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 20px;
-    min-height: 340px;
-    padding: 8px 0;
-  }
-  .clev-session {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 8px;
-  }
-  .clev-session-label {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    color: var(--fg);
-    background: var(--bg-raise);
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    padding: 7px 14px 7px 10px;
-    white-space: nowrap;
-  }
-  .clev-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--product-blue);
-    box-shadow: 0 0 0 3px color-mix(in oklab, var(--product-blue) 25%, transparent);
-    animation: clevPulse 2.2s ease-in-out infinite;
-  }
-  @keyframes clevPulse {
-    0%, 100% { box-shadow: 0 0 0 3px color-mix(in oklab, var(--product-blue) 25%, transparent); }
-    50%      { box-shadow: 0 0 0 6px color-mix(in oklab, var(--product-blue) 10%, transparent); }
-  }
-  html[data-motion="off"] .clev-dot { animation: none; }
-  .clev-spine {
-    flex: 1;
-    width: 2px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    background: linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--product-blue) 80%, transparent) 0%,
-      color-mix(in oklab, var(--product-blue) 45%, transparent) 50%,
-      color-mix(in oklab, var(--product-blue) 20%, transparent) 100%
-    );
-    border-radius: 2px;
-    position: relative;
-  }
-  .clev-session-end {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--fg-mute);
-  }
-
-  .clev-events {
-    position: relative;
-    display: block;
-    padding: 8px 0;
-  }
-  .clev-event {
-    position: absolute;
-    top: var(--y);
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .clev-arrow {
-    flex: 0 0 auto;
-    width: 26px;
-    height: 1px;
-    background: color-mix(in oklab, var(--product-blue) 55%, transparent);
-    position: relative;
-    margin-left: -20px;
-  }
-  .clev-arrow::after {
-    content: "";
-    position: absolute;
-    right: -1px; top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    width: 5px; height: 5px;
-    border-top: 1px solid color-mix(in oklab, var(--product-blue) 70%, transparent);
-    border-right: 1px solid color-mix(in oklab, var(--product-blue) 70%, transparent);
-  }
-  .clev-event-body {
-    flex: 1;
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-left: 2px solid color-mix(in oklab, var(--product-blue) 60%, transparent);
+    /* Architectural Micro-Capsule Tag */
+    padding: 6px 14px;
     border-radius: 6px;
-    padding: 10px 14px;
-  }
-  .clev-event-head {
-    display: flex; align-items: center; gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    color: var(--fg);
-    margin-bottom: 4px;
-  }
-  .clev-trigger {
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--product-blue);
-    background: color-mix(in oklab, var(--product-blue) 12%, transparent);
-    border: 1px solid color-mix(in oklab, var(--product-blue) 30%, transparent);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-  .clev-event-msg {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: 0.92rem;
-    color: var(--fg-dim);
-    line-height: 1.35;
+    border: 1px solid color-mix(in oklab, var(--card-accent) 26%, var(--line-strong));
+    background: color-mix(in oklab, var(--card-accent) 3.5%, rgba(253, 252, 251, 0.4));
+    color: color-mix(in oklab, var(--card-accent) 85%, var(--fg-dim));
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+
+    transition:
+      color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* =========================================================
-     ForAgent diagram — two private numbers, one call
-     ========================================================= */
-  .for-call {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 14px;
-    padding: 24px 0 28px;
+  .product-cta:hover {
+    color: var(--card-accent);
+    border-color: color-mix(in oklab, var(--card-accent) 60%, var(--line-strong));
+    background: color-mix(in oklab, var(--card-accent) 8%, rgba(253, 252, 251, 0.8));
+    box-shadow:
+      0 4px 12px -4px color-mix(in oklab, var(--card-accent) 20%, transparent),
+      0 1px 2px color-mix(in oklab, var(--card-accent) 6%, transparent);
+    transform: translateY(-0.5px);
   }
-  .for-party {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-  }
-  .for-party-chip {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 0.98rem;
-    color: var(--fg);
-    background: var(--bg-raise);
-    border: 1px solid var(--line-strong);
-    border-radius: 10px;
-    padding: 10px 16px;
-    min-width: 130px;
-  }
-  .for-a .for-party-chip { border-top: 2px solid color-mix(in oklab, var(--product-violet) 60%, transparent); }
-  .for-b .for-party-chip { border-top: 2px solid color-mix(in oklab, var(--product-violet) 60%, transparent); }
-  .for-party-addr {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--fg-mute);
-    letter-spacing: 0.01em;
-  }
-  .for-line {
-    position: relative;
-    width: 140px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .for-wave {
-    width: 100%;
-    height: 32px;
-    overflow: visible;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
-  }
-  .for-wave path {
-    fill: none;
-    stroke: color-mix(in oklab, var(--product-violet) 65%, transparent);
-    stroke-width: 1.25;
-    stroke-linecap: round;
-    stroke-dasharray: 6 10;
-    animation: forWaveFlow 2.4s linear infinite;
-  }
-  @keyframes forWaveFlow {
-    from { stroke-dashoffset: 0; }
-    to   { stroke-dashoffset: -32; }
-  }
-  html[data-motion="off"] .for-wave path { animation: none; stroke-dasharray: none; }
 
-  /* ForAgent channel — dashed line + encrypted payload shimmer + privacy scanner.
-     Reads as: data is flowing, and the scanner sweeps across without reading it. */
-  .for-channel {
-    position: relative;
-    width: 100%;
-    height: 34px;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  /* Sync tag button with card hover for instant visual signpost */
+  .product-card:hover .product-cta {
+    color: var(--card-accent);
+    border-color: color-mix(in oklab, var(--card-accent) 60%, var(--line-strong));
+    background: color-mix(in oklab, var(--card-accent) 8%, rgba(253, 252, 251, 0.8));
+    box-shadow:
+      0 4px 12px -4px color-mix(in oklab, var(--card-accent) 20%, transparent),
+      0 1px 2px color-mix(in oklab, var(--card-accent) 6%, transparent);
   }
-  .for-channel-line {
-    position: absolute;
-    left: 0; right: 0; top: 50%;
-    height: 1px;
-    background: repeating-linear-gradient(
-      to right,
-      color-mix(in oklab, var(--product-violet) 60%, transparent) 0 6px,
-      transparent 6px 12px
-    );
-    transform: translateY(-50%);
+
+  /* Extra subtle lift when hovering directly over the button itself */
+  .product-cta:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 6px 16px -4px color-mix(in oklab, var(--card-accent) 25%, transparent),
+      0 1px 2px color-mix(in oklab, var(--card-accent) 8%, transparent);
   }
-  .for-channel-payload {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 6px;
-  }
-  .for-channel-payload span {
+
+  .product-cta span {
     display: inline-block;
-    width: 2px;
-    border-radius: 1px;
-    background: color-mix(in oklab, var(--product-violet) 85%, transparent);
-    animation: forPayloadFlicker 2.4s ease-in-out infinite;
-  }
-  .for-channel-payload span:nth-child(1)  { height: 10px; opacity: 0.55; }
-  .for-channel-payload span:nth-child(2)  { height: 6px;  opacity: 0.45; animation-delay: -0.2s; }
-  .for-channel-payload span:nth-child(3)  { height: 14px; opacity: 0.65; animation-delay: -0.4s; animation-duration: 2.0s; }
-  .for-channel-payload span:nth-child(4)  { height: 8px;  opacity: 0.5;  animation-delay: -0.6s; }
-  .for-channel-payload span:nth-child(5)  { height: 12px; opacity: 0.6;  animation-delay: -0.8s; animation-duration: 2.8s; }
-  .for-channel-payload span:nth-child(6)  { height: 5px;  opacity: 0.4;  animation-delay: -1.0s; }
-  .for-channel-payload span:nth-child(7)  { height: 16px; opacity: 0.7;  animation-delay: -1.2s; animation-duration: 1.8s; }
-  .for-channel-payload span:nth-child(8)  { height: 9px;  opacity: 0.55; animation-delay: -1.4s; }
-  .for-channel-payload span:nth-child(9)  { height: 7px;  opacity: 0.45; animation-delay: -1.6s; animation-duration: 2.6s; }
-  .for-channel-payload span:nth-child(10) { height: 13px; opacity: 0.6;  animation-delay: -1.8s; }
-  .for-channel-payload span:nth-child(11) { height: 6px;  opacity: 0.45; animation-delay: -2.0s; animation-duration: 2.2s; }
-  .for-channel-payload span:nth-child(12) { height: 11px; opacity: 0.55; animation-delay: -2.2s; }
-  .for-channel-payload span:nth-child(13) { height: 8px;  opacity: 0.5;  animation-delay: -2.4s; animation-duration: 2.0s; }
-  .for-channel-payload span:nth-child(14) { height: 15px; opacity: 0.65; animation-delay: -2.6s; }
-  @keyframes forPayloadFlicker {
-    0%, 100% { transform: scaleY(1); }
-    50%      { transform: scaleY(0.45); }
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Privacy scanner — soft band that sweeps across but dims what's underneath. */
-  .for-channel-scan {
-    position: absolute;
-    top: -4px;
-    bottom: -4px;
-    width: 26%;
-    left: 0;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      color-mix(in oklab, var(--bg-card) 90%, transparent) 48%,
-      color-mix(in oklab, var(--bg-card) 90%, transparent) 52%,
-      transparent 100%
-    );
-    animation: forScan 5.2s cubic-bezier(0.45, 0, 0.25, 1) infinite;
-  }
-  .for-channel-scan::before,
-  .for-channel-scan::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 6px;
-    height: 1px;
-    background: color-mix(in oklab, var(--product-violet) 70%, transparent);
-  }
-  .for-channel-scan::before { left: 47%; }
-  .for-channel-scan::after  { right: 47%; }
-  @keyframes forScan {
-    0%   { transform: translateX(-40%); opacity: 0; }
-    8%   { opacity: 1; }
-    92%  { opacity: 1; }
-    100% { transform: translateX(380%); opacity: 0; }
-  }
-  html[data-motion="off"] .for-channel-payload span,
-  html[data-motion="off"] .for-channel-scan { animation: none; }
-  .for-line-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--fg-mute);
+  /* Double-stage arrow slide: slides 3px on card hover, 5px on button hover */
+  .product-card:hover .product-cta span {
+    transform: translateX(3px);
   }
 
-  .for-stages {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-top: 8px;
-  }
-  .for-stages li {
-    display: grid;
-    grid-template-columns: 28px 80px 1fr;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 16px;
-    background: var(--bg-card);
-  }
-  .for-stage-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.66rem;
-    color: var(--fg-mute);
-    letter-spacing: 0.08em;
-  }
-  .for-stage-name {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 0.98rem;
-    color: var(--fg);
-  }
-  .for-stage-desc {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 0.82rem;
-    color: var(--fg-dim);
-  }
-
-  @media (max-width: 720px) {
-    .clev-timeline { grid-template-columns: 120px 1fr; gap: 12px; }
-    .clev-arrow { width: 18px; margin-left: -12px; }
-    .for-call { grid-template-columns: 1fr; gap: 2px; justify-items: center; padding: 10px 0 14px; }
-    .for-line {
-      width: 2px;
-      height: 32px;
-      transform: none;
-      display: block;
-      position: relative;
-      padding: 0;
-      margin: 2px 0;
-    }
-    .for-line .for-channel,
-    .for-line .for-line-label { display: none; }
-    .for-line::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 8px;
-      width: 1px;
-      transform: translateX(-50%);
-      background-image: repeating-linear-gradient(
-        to bottom,
-        color-mix(in oklab, var(--product-violet) 60%, transparent) 0 4px,
-        transparent 4px 8px
-      );
-    }
-    .for-line::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 6px;
-      height: 6px;
-      border-right: 1px solid color-mix(in oklab, var(--product-violet) 70%, transparent);
-      border-bottom: 1px solid color-mix(in oklab, var(--product-violet) 70%, transparent);
-      transform: translateX(-50%) rotate(45deg);
-    }
+  .product-cta:hover span {
+    transform: translateX(5px) !important;
   }
 
   /* =========================================================
@@ -1190,6 +843,7 @@
     line-height: 1.65;
     max-width: 44ch;
   }
+  .founder-bio p + p { margin-top: 14px; }
   .contact-list {
     list-style: none;
     display: flex;
@@ -1230,11 +884,12 @@
     border-top: 1px solid var(--line);
     padding: 40px 0 48px;
     margin-top: 20px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.82rem;
     color: var(--fg-mute);
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
     line-height: 1.6;
+    font-weight: 400;
   }
   .footer-inner {
     display: flex;
@@ -1265,7 +920,7 @@
     color: var(--fg);
     letter-spacing: -0.01em;
   }
-  .fm-product .fm-prefix { color: var(--fm-color, inherit); }
+  .fm-product .fm-suffix { color: var(--fm-color, inherit); }
   .fm-product .fm-tm {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.58rem;
@@ -1273,8 +928,8 @@
     margin-left: 1px;
     align-self: flex-start;
   }
-  .fm-product.fm-clev { --fm-color: #1e3fff; }
-  .fm-product.fm-for  { --fm-color: #7c3aed; }
+  .fm-product.fm-clev { --fm-color: var(--product-blue); }
+  .fm-product.fm-for  { --fm-color: var(--product-violet); }
   .fm-city {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
@@ -1296,7 +951,6 @@
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
-    .flow-line.active { animation: none; }
   }
 
   /* =========================================================
@@ -1306,9 +960,6 @@
     .thesis, .backed, .founder-block { grid-template-columns: 1fr; gap: 24px; }
     .backed-list { grid-template-columns: 1fr 1fr; }
     .products { grid-template-columns: 1fr; }
-    .diagram-grid { grid-template-columns: 1fr; gap: 28px; }
-    .diagram-col:first-child { border-right: none; padding-right: 0; padding-bottom: 28px; border-bottom: 1px dashed var(--line); }
-    .diagram-col:last-child  { padding-left: 0; }
     .nav-links a:not(.nav-cta) { display: none; }
   }
   @media (max-width: 600px) {
@@ -1316,7 +967,6 @@
     .hero { padding: 96px 0 60px; }
     .hero-logo { width: 200px; margin-bottom: -36px; }
     .backed-list { grid-template-columns: 1fr; }
-    .diagram-wrap { padding: 32px 20px; }
     .contact-list li { grid-template-columns: 1fr; gap: 4px; }
   }
 
@@ -1384,34 +1034,6 @@
     .products { gap: 14px; }
     .product-card { padding: 24px 20px; }
 
-    /* How it works — diagram reflow */
-    .diagram-wrap { padding: 24px 16px; }
-    .diagram-col { padding: 0; }
-    .diagram-col-head { margin-bottom: 18px; flex-wrap: wrap; gap: 6px; }
-    .diagram-col-head h3 { font-size: 1.05rem; }
-    .diagram-col-head .tag { font-size: 0.62rem; }
-
-    /* ClevAgent timeline — condense left rail */
-    .clev-timeline { grid-template-columns: 92px 1fr; gap: 10px; min-height: 300px; }
-    .clev-session-label { font-size: 0.58rem; padding: 5px 9px 5px 7px; gap: 5px; }
-    .clev-session-label .clev-session-suffix { display: none; }
-    .clev-dot { width: 5px; height: 5px; }
-    .clev-session-end { font-size: 0.56rem; }
-    .clev-arrow { width: 14px; margin-left: -10px; }
-    .clev-event-body { padding: 8px 10px; border-radius: 5px; }
-    .clev-event-head { font-size: 0.68rem; gap: 6px; margin-bottom: 3px; flex-wrap: wrap; }
-    .clev-trigger { font-size: 0.54rem; padding: 1px 5px; }
-    .clev-event-msg { font-size: 0.84rem; line-height: 1.32; }
-
-    /* ForAgent call — already stacks via 720px rule; tighten spacing */
-    .for-call { padding: 8px 0 12px; gap: 2px; }
-    .for-party-chip { font-size: 0.9rem; padding: 9px 14px; min-width: 110px; }
-    .for-party-addr { font-size: 0.64rem; }
-    .for-stages li { grid-template-columns: 22px 1fr; gap: 10px; padding: 8px 12px; }
-    .for-stages li .for-stage-name { font-size: 0.9rem; line-height: 1.2; }
-    .for-stages li .for-stage-desc { display: none; }
-    .diagram-caption { font-size: 0.82rem; margin-top: 14px; }
-
     /* Backed by */
     .backed { gap: 16px; padding-top: 18px; }
     .backed-head { padding-top: 24px; }
@@ -1427,7 +1049,7 @@
     /* Footer */
     footer.footer { padding: 28px 0 36px; }
     .footer-inner { gap: 14px; }
-    .footer-inner .legal { font-size: 0.66rem; }
+    .footer-inner .legal { font-size: 0.74rem; }
     .footer-mini {
       flex-direction: row;
       gap: 10px;
@@ -1570,23 +1192,24 @@
       top: 25px;
       height: 28px;
     }
+    .product-robot-illust {
+      display: none;
+    }
+    .product-features-wrap {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      gap: 0;
+    }
     .product-card .product-cta {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
       width: 100%;
-      padding: 12px 16px;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: transparent;
-      font-size: 0.92rem;
-      margin-top: 4px;
+      justify-content: center;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      margin-top: 14px;
     }
-    .product-card .product-cta:hover { border-color: var(--fg-dim); }
-    .product-card .product-cta {
-      border-color: color-mix(in oklab, var(--card-accent, var(--line-strong)) 35%, var(--line-strong));
-      color: var(--card-accent, var(--fg));
+    .product-head {
+      margin-bottom: 20px;
     }
 
     /* Thesis — tighter top spacing */
@@ -1596,10 +1219,6 @@
 
     /* Section titles — breathing room */
     .section-title { line-height: 1.18; }
-
-    /* Diagram col tag ("On one agent" / "Between agents") */
-    .diagram-col-head { gap: 10px; }
-    .diagram-col-head .tag { font-size: 0.7rem; letter-spacing: 0.1em; }
 
     /* Founder / contact */
     .founder-block { padding-top: 12px; }
@@ -1612,44 +1231,17 @@
     .legal, .footer-inner .legal { line-height: 1.6; }
 
     /* =========================================================
-       Unified type scale — products & how sections
+       Unified type scale — products
        Target scale: H3 20 / body 15 / caption 13.5 / micro 11.5
        ========================================================= */
 
     /* Products card */
-    .product-card h2 { font-size: 1.3rem; line-height: 1.25; }               /* 20.8 */
-    .product-version { font-size: 0.72rem; letter-spacing: 0.04em; white-space: nowrap; } /* 11.5 */
-    .product-status { font-size: 0.72rem; white-space: nowrap; }              /* 11.5 */
-
-    /* Stack product-name vertically on mobile so version sits below h2,
-       status stays aligned to top-right — prevents long product version text and
-       "Private beta" from wrapping at narrow widths */
-    .product-header { align-items: flex-start; }
-    .product-name { flex-direction: column; align-items: flex-start; gap: 4px; }
-    .product-desc { font-size: 0.94rem; line-height: 1.65; }                  /* 15   */
-    .product-features li { font-size: 0.78rem; line-height: 1.55; }           /* 12.5 */
-    .product-card .product-cta { font-size: 0.88rem; }                        /* 14   */
-
-    /* How section — match product-card h3 scale */
-    .diagram-col-head h3 { font-size: 1.3rem; line-height: 1.25; }            /* 20.8, was 16.8 */
-    .diagram-col-head .tag { font-size: 0.72rem; letter-spacing: 0.08em; }    /* 11.5 */
-
-    /* ClevAgent timeline */
-    .clev-events { height: auto !important; min-height: 0 !important; display: flex; flex-direction: column; gap: 18px; padding: 8px 0 2px; }
-    .clev-event { position: static !important; transform: none !important; top: auto !important; }
-    .clev-event { font-family: 'EB Garamond', Georgia, serif; }
-    .clev-event em, .clev-event .clev-event-msg { font-size: 0.84rem; line-height: 1.45; }
-    .clev-trigger { font-size: 0.72rem; letter-spacing: 0.08em; }
-
-    /* ForAgent diagram */
-    .for-party-chip { font-size: 0.92rem; }                                    /* 14.7 */
-    .for-party-addr { font-size: 0.72rem; letter-spacing: 0.02em; }            /* 11.5 */
-    .for-stages .for-stage-num { font-size: 0.78rem; }                         /* 12.5 */
-    .for-stages .for-stage-name { font-size: 1rem; }                           /* 16   */
-    .for-stages .for-stage-desc { font-size: 0.88rem; line-height: 1.55; }     /* 14   */
-
-    /* Captions under diagrams */
-    .diagram-caption { font-size: 0.88rem; line-height: 1.6; }                 /* 14   */
+    .product-card h2 { font-size: 1.3rem; line-height: 1.25; }
+    .product-logo { width: 30px; height: 30px; }
+    .product-card.clevagent .product-logo { width: 44px; height: 44px; }
+    .product-desc { font-size: 0.94rem; line-height: 1.65; }
+    .product-features li { font-size: 0.82rem; line-height: 1.55; }
+    .product-card .product-cta { font-size: 0.88rem; }
   }
 
 </style>
@@ -1669,7 +1261,6 @@
   <a href="#top" data-target="top"><span class="sn-label">Overview</span><span class="sn-tick"></span></a>
   <a href="#thesis" data-target="thesis"><span class="sn-label">Thesis</span><span class="sn-tick"></span></a>
   <a href="#products" data-target="products"><span class="sn-label">Products</span><span class="sn-tick"></span></a>
-  <a href="#how" data-target="how"><span class="sn-label">How it works</span><span class="sn-tick"></span></a>
   <a href="#team" data-target="team"><span class="sn-label">Founder</span><span class="sn-tick"></span></a>
 </nav>
 
@@ -1679,10 +1270,10 @@
   <div class="shell">
     <img src="assets/logo-full.png" alt="SJK Systems" class="hero-logo reveal">
     <h1 class="hero-tagline reveal" data-copy="tagline">
-      Infrastructure for <em>accountable</em> AI agents.
+      Infrastructure for agent <em>work</em> and <em>connection</em>.
     </h1>
     <p class="hero-sub reveal" data-copy="sub">
-      SJK Systems builds infrastructure for the next generation of AI agents: ClevAgent gives agent work a supervised middle layer, while ForAgent gives agents private numbers so they can call each other through a controlled app.
+      ClevAgent gives agents a supervised workspace. ForAgent gives them a controlled way to connect.
     </p>
     <div class="hero-meta reveal">
       <div class="hero-support" aria-label="Supported by Microsoft Founders Hub, Datadog for Startups, and Google for Startups">
@@ -1722,10 +1313,10 @@
       </div>
       <div class="thesis-body reveal">
         <p data-copy="thesis-1">
-          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs a guided environment where its work can be observed, corrected, and improved. Multiple agents need private numbers and a controlled way to call each other.
+          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs an environment where its work can be observed, guided, and improved. Multiple agents need private numbers and a controlled way to call each other.
         </p>
         <p data-copy="thesis-2">
-          SJK Systems builds that middle layer. <em>ClevAgent</em> gives individual agents a supervised place to work. <em>ForAgent</em> gives agents private numbers and a phone-like app for controlled agent-to-agent calls.
+          SJK Systems builds that middle layer. <em>ClevAgent</em> adds a guidance layer around individual agent sessions. <em>ForAgent</em> gives agents private numbers and a phone-like app for controlled agent-to-agent calls.
         </p>
       </div>
     </div>
@@ -1737,27 +1328,31 @@
   <div class="shell">
     <div class="reveal">
       <div class="section-label">02 / Products</div>
-      <h2 class="section-title">A middle layer for agent work.<br>A private number for agent calls.</h2>
+      <h2 class="section-title">A guidance layer for agent work.<br>A private channel for agent communication.</h2>
     </div>
 
     <div class="products reveal">
       <article class="product-card clevagent">
         <header class="product-head">
           <div class="product-name">
-            <h2>ClevAgent</h2>
-            <span class="product-version">v0.x · desktop</span>
+            <h2>Clev<span class="brand-agent">Agent</span></h2>
           </div>
-          <span class="product-status">Beta</span>
+          <img src="assets/clevagent-icon.svg" alt="ClevAgent logo" class="product-logo">
         </header>
         <p class="product-desc" data-copy="clev-desc">
-          A supervised terminal for AI agents. ClevAgent sits between the agent and its work, adding guidance when the session needs a better next move.
+          A guidance layer for agent sessions. ClevAgent watches the work as it happens and adds the right nudge when the agent needs a better next move.
         </p>
-        <ul class="product-features">
-          <li>Supervised agent workspace</li>
-          <li>Corrective guidance</li>
-          <li>File and memory hygiene</li>
-          <li>Security and audit path</li>
-        </ul>
+        <div class="product-features-wrap">
+          <ul class="product-features">
+            <li>Agent session guidance</li>
+            <li>Waste and loop detection</li>
+            <li>File and memory hygiene</li>
+            <li>Reviewable work history</li>
+          </ul>
+          <div class="product-robot-illust">
+            <img src="assets/robot_waving_pose.png" alt="ClevAgent Robot Mascot" class="robot-illust-img">
+          </div>
+        </div>
         <a href="https://clevagent.io" target="_blank" rel="noopener" class="product-cta">
           Visit clevagent.io <span>→</span>
         </a>
@@ -1766,129 +1361,28 @@
       <article class="product-card foragent">
         <header class="product-head">
           <div class="product-name">
-            <h2>ForAgent</h2>
-            <span class="product-version">v0.x · app</span>
+            <h2>For<span class="brand-agent">Agent</span></h2>
           </div>
-          <span class="product-status">Private beta</span>
+          <img src="assets/foragent-icon.svg" alt="ForAgent logo" class="product-logo">
         </header>
         <p class="product-desc" data-copy="for-desc">
-          Telecom for AI agents. ForAgent gives each agent a private number and a controlled app for agent-to-agent calls. We handle routing, authentication, logs, and trust without reading the conversation.
+          Private communication for AI agents. ForAgent gives each agent a number and a controlled channel for agent-to-agent calls.
         </p>
-        <ul class="product-features">
-          <li>Private agent numbers</li>
-          <li>Controlled agent calls</li>
-          <li>Approved contacts</li>
-          <li>Payload-blind by design</li>
-        </ul>
+        <div class="product-features-wrap">
+          <ul class="product-features">
+            <li>Private agent numbers</li>
+            <li>Controlled agent calls</li>
+            <li>Approved contacts</li>
+            <li>Payload-blind routing</li>
+          </ul>
+          <div class="product-robot-illust">
+            <img src="assets/foragent_phone_preview.png" alt="ForAgent Phone Preview" class="robot-illust-img foragent-phone">
+          </div>
+        </div>
         <a href="https://foragent.io" target="_blank" rel="noopener" class="product-cta">
           Visit foragent.io <span>→</span>
         </a>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ How it works ============ -->
-<section class="block" id="how">
-  <div class="shell">
-    <div class="reveal">
-      <div class="section-label">03 — How it works</div>
-      <h2 class="section-title">How agent work and agent communication flow.</h2>
-    </div>
-
-    <div class="diagram-wrap reveal">
-      <div class="diagram-grid">
-        <!-- LEFT — ClevAgent: vertical session timeline with interventions -->
-        <div class="diagram-col clev-col">
-          <div class="diagram-col-head">
-            <h3>ClevAgent</h3>
-            <span class="tag">With your agent</span>
-          </div>
-
-          <div class="clev-timeline" aria-hidden="true">
-            <div class="clev-session">
-              <div class="clev-session-label">
-                <span class="clev-dot"></span>
-                <span>your agent<span class="clev-session-suffix"> · session open</span></span>
-              </div>
-              <div class="clev-spine"></div>
-              <div class="clev-session-end">
-                <span>session continues</span>
-              </div>
-            </div>
-
-            <div class="clev-events">
-              <div class="clev-event" style="--y: 18%">
-                <div class="clev-arrow"></div>
-                <div class="clev-event-body">
-                  <div class="clev-event-head"><span class="clev-trigger">trigger</span>context bloat</div>
-                  <div class="clev-event-msg" style="color: rgb(4, 12, 255);">“trim history before next step”</div>
-                </div>
-              </div>
-              <div class="clev-event" style="--y: 50%">
-                <div class="clev-arrow"></div>
-                <div class="clev-event-body">
-                  <div class="clev-event-head"><span class="clev-trigger">trigger</span>loop detected</div>
-                  <div class="clev-event-msg" style="color: rgb(4, 12, 255);">“stop retrying.<br>try a different path.”</div>
-                </div>
-              </div>
-              <div class="clev-event" style="--y: 82%">
-                <div class="clev-arrow"></div>
-                <div class="clev-event-body">
-                  <div class="clev-event-head"><span class="clev-trigger">trigger</span>bad file path</div>
-                  <div class="clev-event-msg" style="color: rgb(4, 12, 255);">“resolve from<br>project root, not cwd.”</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <p class="diagram-caption">
-            When a logic trigger fires, corrective advice enters the session at the right moment. The agent keeps working with better context and fewer wasted steps.
-          </p>
-        </div>
-
-        <!-- RIGHT — ForAgent: two private numbers, a call placed between them -->
-        <div class="diagram-col for-col">
-          <div class="diagram-col-head">
-            <h3>ForAgent</h3>
-            <span class="tag">Between agents</span>
-          </div>
-
-          <div class="for-call" aria-hidden="true">
-            <div class="for-party for-a">
-              <div class="for-party-chip">alice's agent</div>
-              <div class="for-party-addr">private number 01</div>
-            </div>
-
-            <div class="for-line">
-              <div class="for-channel">
-                <div class="for-channel-line"></div>
-                <div class="for-channel-payload" aria-hidden="true">
-                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="for-channel-scan"></div>
-              </div>
-              <div class="for-line-label">bounded session · payload-blind</div>
-            </div>
-
-            <div class="for-party for-b">
-              <div class="for-party-chip">bob's agent</div>
-              <div class="for-party-addr">private number 02</div>
-            </div>
-          </div>
-
-          <ol class="for-stages">
-            <li><span class="for-stage-num">01</span><span class="for-stage-name">dial</span><span class="for-stage-desc">alice's agent calls bob's private number</span></li>
-            <li><span class="for-stage-num">02</span><span class="for-stage-name">ring</span><span class="for-stage-desc">bob approves, relay token issued</span></li>
-            <li><span class="for-stage-num">03</span><span class="for-stage-name">talk</span><span class="for-stage-desc">multi-turn messages, payload-blind</span></li>
-            <li><span class="for-stage-num">04</span><span class="for-stage-name">hang up</span><span class="for-stage-desc">either side ends, payload purges in 30d</span></li>
-          </ol>
-
-          <p class="diagram-caption">
-            One agent calls a private number. The other accepts. ForAgent verifies the channel and keeps the conversation bounded and private.
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1898,7 +1392,7 @@
   <div class="shell">
     <div class="founder-block">
       <div class="founder-col reveal">
-        <div class="section-label">04 — Founder's message</div>
+        <div class="section-label">03 — Founder's message</div>
         <div class="founder-name">Sean Kwon</div>
         <div class="founder-role">
           <span>Founder &amp; CEO</span>
@@ -1906,9 +1400,11 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5z"/><path fill="#fff" d="M8 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
         </div>
-        <p class="founder-bio">
-          Sean’s background in investment brokerage shaped how he thinks about agent infrastructure. In live markets, the middle layer matters: the systems between intention and execution, and the controls that help work happen with discipline. SJK Systems brings that idea to AI agents. ClevAgent gives individual agents a supervised place to work, while ForAgent gives agents private numbers and a controlled way to call each other. The company is still early. If this direction is relevant to you, please reach out.
-        </p>
+        <div class="founder-bio">
+          <p>Sean’s time in investment brokerage shaped a simple belief: the layer between intent and execution matters.</p>
+          <p>SJK Systems builds that middle layer. ClevAgent adds guidance around individual agent sessions as work happens. ForAgent gives agents private numbers and controlled channels to communicate.</p>
+          <p>If this is a problem you’re thinking about, we’d like to talk.</p>
+        </div>
       </div>
       <div class="contact-col reveal">
         <div class="section-label">Contact</div>
@@ -1941,11 +1437,11 @@
       </div>
       <div class="footer-mini">
         <span class="fm-product fm-clev">
-          <span class="fm-name"><span class="fm-prefix">Clev</span>Agent</span>
+          <span class="fm-name">Clev<span class="fm-suffix">Agent</span></span>
           <span class="fm-tm">™</span>
         </span>
         <span class="fm-product fm-for">
-          <span class="fm-name"><span class="fm-prefix">For</span>Agent</span>
+          <span class="fm-name">For<span class="fm-suffix">Agent</span></span>
           <span class="fm-tm">™</span>
         </span>
       </div>
@@ -1988,8 +1484,7 @@
     top:      { num: '01', label: 'Overview'    },
     thesis:   { num: '02', label: 'Thesis'      },
     products: { num: '03', label: 'Products'    },
-    how:      { num: '04', label: 'How it works'},
-    team:     { num: '05', label: 'Founder'     },
+    team:     { num: '04', label: 'Founder'     },
   };
   function updateMobileIndicator(id) {
     const doc = document.documentElement;
