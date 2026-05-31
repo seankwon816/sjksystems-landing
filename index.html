@@ -1306,21 +1306,30 @@
 
   @media (max-width: 480px) {
     .product-features-wrap {
-      grid-template-columns: 1fr;
-      gap: 16px;
+      grid-template-columns: 1.4fr 0.6fr;
+      gap: 6px;
+      padding-top: 12px;
     }
     .product-robot-illust {
-      margin-left: 0;
-      margin-top: 16px;
-      margin-bottom: 8px;
-      height: auto;
+      margin-left: -10px;
+      margin-top: 0;
+      margin-bottom: 0;
+      height: 100%;
     }
     .robot-illust-img {
-      max-height: 110px;
+      max-height: 76px;
     }
     .robot-illust-img.foragent-phone {
-      max-height: 120px;
-      top: 0 !important;
+      max-height: 86px;
+      top: 4px !important;
+    }
+    .product-features li {
+      font-size: 0.76rem;
+      line-height: 1.45;
+      gap: 6px;
+    }
+    .product-features li::before {
+      margin-top: 1px;
     }
   }
 
