@@ -25,7 +25,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&family=Fraunces:opsz,wght@9..144,500&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 
 <style>
   /* =========================================================
@@ -37,7 +37,6 @@
     --accent-l: 0.58;
 
     --bg: #faf7f0;
-    --bg-raise: #f4efe5;
     --bg-card: #ffffff;
     --bg-card-hover: #fbf8f1;
     --line: #e8e1d2;
@@ -50,22 +49,13 @@
 
     --accent: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue));
     --accent-soft: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.14);
-    --accent-line: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.32);
 
     --product-blue: oklch(0.546 0.245 262.881); /* Exact ClevAgent blue (#2563EB) */
-    --product-blue-soft: oklch(0.546 0.245 262.881 / 0.08);
-    --product-blue-line: oklch(0.546 0.245 262.881 / 0.28);
-
     --product-violet: oklch(0.538 0.231 294.673); /* Exact ForAgent violet (#7c3aed) */
-    --product-violet-soft: oklch(0.538 0.231 294.673 / 0.08);
-    --product-violet-line: oklch(0.538 0.231 294.673 / 0.28);
 
     --radius-sm: 6px;
     --radius: 10px;
     --radius-lg: 14px;
-
-    --shadow-sm: 0 1px 0 rgba(255,255,255,0.02) inset;
-    --shadow-card: 0 24px 60px -45px rgba(60,40,10,0.25);
 
     --sec-gap: 120px;   /* comfortable */
     --hero-copy-width: 35rem;
@@ -74,18 +64,6 @@
   html[data-density="compact"]     { --sec-gap: 84px; }
   html[data-density="comfortable"] { --sec-gap: 120px; }
   html[data-density="spacious"]    { --sec-gap: 160px; }
-
-  html[data-hero-bg="pure"]       { --bg: #ffffff; }
-  html[data-hero-bg="warm-light"] { /* fixed light default */ }
-  html[data-hero-bg="cool"],
-  html[data-hero-bg="clean-light"] {
-    --bg: #f8f7f2;
-    --bg-raise: #f0ede4;
-    --bg-card: #ffffff;
-    --bg-card-hover: #fbf8f1;
-    --line: #e2dbc9;
-    --line-strong: #d2c9b5;
-  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { color-scheme: light; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
@@ -133,66 +111,6 @@
   }
 
   /* =========================================================
-     Top bar
-     ========================================================= */
-  .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: color-mix(in oklab, var(--bg) 85%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.25s, background 0.25s;
-  }
-  .topbar.scrolled { border-bottom-color: var(--line); }
-  .topbar-inner {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 18px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-  }
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--fg);
-  }
-  .brand-logo {
-    height: 28px;
-    width: auto;
-    display: block;
-    filter: invert(1) hue-rotate(180deg) brightness(0.22) contrast(1.1);
-  }
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    align-items: center;
-  }
-  .nav-links a {
-    color: var(--fg-dim);
-    text-decoration: none;
-    font-size: 0.88rem;
-    letter-spacing: -0.005em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--fg); }
-  .nav-cta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    color: var(--fg);
-    border: 1px solid var(--line-strong);
-    padding: 7px 12px;
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .nav-cta:hover { background: var(--bg-card); border-color: var(--fg-faint); }
-
-  /* =========================================================
      Hero
      ========================================================= */
   .hero {
@@ -200,61 +118,6 @@
     padding: 140px 0 78px;
   }
   .shell { position: relative; z-index: 2; }
-  .hero-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--fg-dim);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-  }
-  .hero-status .st-bracket {
-    color: var(--fg-faint);
-    padding: 0 2px;
-    font-weight: 400;
-  }
-  .hero-status .st-state {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 0 10px;
-    color: var(--fg);
-  }
-  .hero-status .st-divider {
-    width: 18px;
-    height: 1px;
-    background: var(--line-strong);
-    margin: 0 14px;
-    display: inline-block;
-  }
-  .hero-status .st-meta { color: var(--fg-mute); }
-  .status-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: oklch(0.74 0.14 150);
-    box-shadow: 0 0 0 3px oklch(0.74 0.14 150 / 0.18);
-    position: relative;
-  }
-  .status-dot::after {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 1px solid oklch(0.74 0.14 150 / 0.4);
-    animation: pulse 2.4s cubic-bezier(0.2, 0.6, 0.2, 1) infinite;
-  }
-  @keyframes pulse {
-    0%   { transform: scale(0.8); opacity: 0.9; }
-    100% { transform: scale(1.9); opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .status-dot::after { animation: none; }
-  }
   .hero-logo {
     width: 260px;
     margin: 28px 0 -44px -8px;
@@ -276,23 +139,6 @@
     color: var(--fg);
     background: linear-gradient(180deg, transparent 68%, var(--accent-soft) 68% 94%, transparent 94%);
     padding: 0 0.08em;
-  }
-  /* Refined inline emphasis used in body copy */
-  .mark {
-    font-style: normal;
-    color: var(--fg);
-    position: relative;
-    white-space: nowrap;
-    padding: 0 0.05em;
-  }
-  .mark::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    bottom: -2px;
-    height: 1px;
-    background: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue));
-    opacity: 0.7;
   }
   .hero-sub {
     font-size: 1.08rem;
@@ -470,17 +316,6 @@
     color: var(--fg);
     font-weight: 500;
   }
-  .thesis-pullquote {
-    margin-top: 12px;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--line);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-style: normal;
-    font-size: 1.1rem;
-    color: var(--fg);
-    line-height: 1.5;
-  }
-
   /* =========================================================
      Products
      ========================================================= */
@@ -759,52 +594,6 @@
   }
 
   /* =========================================================
-     Backed by
-     ========================================================= */
-  .backed {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 64px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
-  }
-  .backed-head { padding-top: 36px; }
-  .backed-list {
-    padding-top: 36px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .backed-item {
-    background: var(--bg-card);
-    padding: 30px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    justify-content: center;
-    min-height: 120px;
-  }
-  .backed-item .b-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    color: var(--fg);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-  .backed-item .b-role {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--fg-mute);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .backed-item.placeholder .b-name { color: var(--fg-mute); font-style: italic; font-weight: 400; }
-
-  /* =========================================================
      Founder & contact
      ========================================================= */
   .founder-block {
@@ -963,16 +752,13 @@
      Responsive
      ========================================================= */
   @media (max-width: 900px) {
-    .thesis, .backed, .founder-block { grid-template-columns: 1fr; gap: 24px; }
-    .backed-list { grid-template-columns: 1fr 1fr; }
+    .thesis, .founder-block { grid-template-columns: 1fr; gap: 24px; }
     .products { grid-template-columns: 1fr; }
-    .nav-links a:not(.nav-cta) { display: none; }
   }
   @media (max-width: 600px) {
-    .shell, .topbar-inner { padding-left: 22px; padding-right: 22px; }
+    .shell { padding-left: 22px; padding-right: 22px; }
     .hero { padding: 96px 0 60px; }
     .hero-logo { width: 200px; margin-bottom: -36px; }
-    .backed-list { grid-template-columns: 1fr; }
     .contact-list li { grid-template-columns: 1fr; gap: 4px; }
   }
 
@@ -986,22 +772,14 @@
     section.block:last-of-type { padding-bottom: 48px; }
     footer.footer { margin-top: 0; padding-top: 24px; }
 
-    /* Top bar — keep brand + CTA, drop the rest */
-    .topbar-inner { padding: 14px 20px; gap: 12px; }
-    .brand-logo { height: 22px; }
-    .nav-links { gap: 10px; }
-    .nav-cta { padding: 7px 10px; font-size: 0.7rem; }
-
     /* Shell padding */
-    .shell, .topbar-inner { padding-left: 20px; padding-right: 20px; }
+    .shell { padding-left: 20px; padding-right: 20px; }
 
     /* Hero */
     .hero { padding: 72px 0 46px; }
     .hero-logo { width: 160px; margin: 12px 0 -24px -4px; }
     .hero-tagline { font-size: clamp(1.75rem, 8.2vw, 2.2rem); letter-spacing: -0.028em; line-height: 1.12; margin-bottom: 22px; max-width: none; }
     .hero-sub { font-size: 0.98rem; line-height: 1.6; margin-bottom: 32px; }
-    .hero-cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
-    .hero-cta-row .btn, .hero-cta-row a { width: 100%; text-align: center; justify-content: center; }
 
     /* Hero meta row — support logos / Michigan C-Corp / Est. 2026 */
     .hero-meta {
@@ -1031,7 +809,6 @@
     /* Section labels / titles */
     .section-label { font-size: 0.66rem; gap: 10px; margin-bottom: 18px; }
     .section-title { font-size: clamp(1.5rem, 6.2vw, 1.9rem); margin-bottom: 56px; max-width: none; }
-    .section-deck { font-size: 0.98rem; line-height: 1.55; }
 
     /* Thesis */
     .thesis { gap: 18px; padding-top: 18px; }
@@ -1040,11 +817,6 @@
     .products { gap: 14px; }
     .product-card { padding: 24px 20px; }
 
-    /* Backed by */
-    .backed { gap: 16px; padding-top: 18px; }
-    .backed-head { padding-top: 24px; }
-    .backed-list { padding-top: 24px; }
-    .backed-item { padding: 22px 18px; min-height: 96px; }
 
     /* Founder */
     .founder-block { gap: 20px; padding-top: 18px; }
