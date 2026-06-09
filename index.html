@@ -45,7 +45,7 @@
 
     --fg: #1a1714;
     --fg-dim: #4d4640;
-    --fg-mute: #8a8174;
+    --fg-mute: #746c64;
     --fg-faint: #b8b0a3;
 
     --accent: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue));
@@ -368,10 +368,10 @@
   }
   .support-program {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
+    font-size: 0.64rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #746c64;
+    color: var(--fg-mute);
     white-space: nowrap;
   }
   .support-divider {
@@ -1010,21 +1010,21 @@
       letter-spacing: 0.03em;
     }
     .hero-support-head { gap: 16px; }
-    .hero-support-label, .hero-facts { font-size: 0.6rem; letter-spacing: 0.1em; }
+    .hero-support-label, .hero-facts { font-size: 0.625rem; letter-spacing: 0.1em; }
     .hero-support { gap: 13px; width: min(100%, var(--hero-copy-width)); }
     .support-logos { gap: 14px; padding: 0; margin-left: 0; }
     .support-logo-ms { height: 20px; }
     .support-logo-dd { height: 27px; }
     .support-logo-gfs { height: 24px; }
     .support-partner { gap: 7px; }
-    .support-program { font-size: 0.54rem; letter-spacing: 0.1em; }
+    .support-program { font-size: 0.625rem; letter-spacing: 0.1em; }
     .support-divider { width: 1px; height: 24px; }
     .hero-facts { gap: 12px; flex-wrap: nowrap; }
     .hero-facts span + span::before { content: "·"; width: auto; height: auto; background: none; color: var(--fg-faint); }
 
     @media (max-width: 360px) {
       .hero-support-head { gap: 12px; }
-      .hero-support-label, .hero-facts { font-size: 0.54rem; letter-spacing: 0.08em; }
+      .hero-support-label, .hero-facts { font-size: 0.625rem; letter-spacing: 0.08em; }
       .hero-facts { gap: 9px; }
     }
 
@@ -1059,7 +1059,7 @@
     .footer-mini {
       flex-direction: row;
       gap: 10px;
-      font-size: 0.54rem;
+      font-size: 0.625rem;
     }
     .fm-city { margin-left: 0; padding-left: 0; border-left: none; }
 
@@ -1101,7 +1101,7 @@
     -webkit-backdrop-filter: blur(10px);
     border-radius: 999px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.625rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--fg-mute);
