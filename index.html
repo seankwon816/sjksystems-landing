@@ -104,11 +104,11 @@
     mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
     overflow: hidden;
   }
-  /* FX DEMO A — two light layers wandering across the hero, blooming as they go.
-     Closed-loop waypoint paths (not ping-pong) so the light feels like it roams;
-     scale swells past 1.2 at two waypoints per lap = the "spread" beats. */
-  .hero-backdrop::before,
-  .hero-backdrop::after {
+  /* FX DEMO A — one patch of light roaming section 1: a wide clockwise orbit
+     with irregular waypoints (12s) composed with a small faster wobble (7s).
+     The two periods never line up, so the path reads as organic/random while
+     still circling clockwise overall. */
+  .hero-backdrop::before {
     content: "";
     position: absolute;
     inset: -22%;
@@ -116,29 +116,30 @@
        warm light on the cream bg (global accent vars untouched).
        Tighter falloff (62%) = a trackable patch of light, not a diffuse wash —
        a soft-edged cloud never reads as moving no matter the speed. */
-    background: radial-gradient(560px 400px at 32% 48%, oklch(0.7 0.12 var(--accent-hue) / 0.3), transparent 62%);
-    animation: glow-wander-a 10s ease-in-out infinite;
+    background: radial-gradient(620px 470px at 45% 46%, oklch(0.7 0.12 var(--accent-hue) / 0.3), transparent 62%);
+    animation:
+      glow-orbit 12s ease-in-out infinite,
+      glow-wobble 7s ease-in-out infinite;
   }
-  .hero-backdrop::after {
-    background: radial-gradient(480px 360px at 72% 42%, oklch(0.7 0.11 var(--accent-hue) / 0.24), transparent 64%);
-    animation: glow-wander-b 14s ease-in-out infinite;
+  /* Wide irregular clockwise lap — patch center covers ~10%..82% of the
+     section's height and ~11%..74% of its width (animates `translate`). */
+  @keyframes glow-orbit {
+    0%   { translate: -22% -6%; }
+    14%  { translate: -11% -24%; }
+    27%  { translate: 8% -17%; }
+    40%  { translate: 22% -3%; }
+    55%  { translate: 13% 13%; }
+    68%  { translate: 2% 26%; }
+    82%  { translate: -15% 17%; }
+    100% { translate: -22% -6%; }
   }
-  /* Both lap clockwise (left->top->right->bottom), B phase-shifted vs A.
-     Orbit centers sit mid-section with a +-26% vertical swing: the patch
-     center covers ~10%..85% of the hero's height = all of section 1. */
-  @keyframes glow-wander-a {
-    0%   { transform: translate3d(-20%, -4%, 0) scale(1);    opacity: 0.85; }
-    25%  { transform: translate3d(-4%, -26%, 0) scale(1.2);  opacity: 1; }
-    50%  { transform: translate3d(20%, 4%, 0)   scale(1.05); opacity: 0.88; }
-    75%  { transform: translate3d(4%, 26%, 0)   scale(1.26); opacity: 1; }
-    100% { transform: translate3d(-20%, -4%, 0) scale(1);    opacity: 0.85; }
-  }
-  @keyframes glow-wander-b {
-    0%   { transform: translate3d(9%, -24%, 0)  scale(1.06); opacity: 0.88; }
-    25%  { transform: translate3d(18%, 10%, 0)  scale(1.22); opacity: 1; }
-    50%  { transform: translate3d(-6%, 27%, 0)  scale(1);    opacity: 0.85; }
-    75%  { transform: translate3d(-18%, -6%, 0) scale(1.24); opacity: 1; }
-    100% { transform: translate3d(9%, -24%, 0)  scale(1.06); opacity: 0.88; }
+  /* Small counter-wobble + bloom on a 7s period (animates `transform`/opacity);
+     7s vs 12s = combined path drifts each lap instead of retracing itself. */
+  @keyframes glow-wobble {
+    0%   { transform: translate(2%, -2%) scale(1);    opacity: 0.86; }
+    33%  { transform: translate(-3%, 2%) scale(1.2);  opacity: 1; }
+    66%  { transform: translate(3%, 3%)  scale(1.04); opacity: 0.9; }
+    100% { transform: translate(2%, -2%) scale(1);    opacity: 0.86; }
   }
   /* FX DEMO badge — confirms you are looking at the demo build */
   .fx-badge {
