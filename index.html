@@ -99,9 +99,55 @@
     z-index: 0;
     background:
       radial-gradient(900px 500px at 50% 0%, var(--accent-soft), transparent 70%);
-    mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
+    /* Solid nearly to the hero's end (the corp line) so the light owns the
+       whole of section 1; short fade right at the section boundary. */
+    mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
+    overflow: hidden;
   }
-
+  /* Hero glow — one patch of light roaming section 1: a wide clockwise orbit
+     with irregular waypoints (12s) composed with a small faster wobble (7s).
+     The two periods never line up, so the path reads as organic/random while
+     still circling clockwise overall. */
+  .hero-backdrop::before {
+    content: "";
+    position: absolute;
+    inset: -22%;
+    /* Glow-only color: lighter + more chromatic than --accent so it reads as
+       warm light on the cream bg (global accent vars untouched).
+       Tighter falloff (62%) = a trackable patch of light, not a diffuse wash —
+       a soft-edged cloud never reads as moving no matter the speed. */
+    background: radial-gradient(620px 470px at 45% 46%, oklch(0.7 0.12 var(--accent-hue) / 0.3), transparent 62%);
+    animation:
+      glow-orbit 12s ease-in-out infinite,
+      glow-wobble 7s ease-in-out infinite;
+  }
+  /* Wide irregular clockwise lap — patch center covers ~10%..82% of the
+     section's height and ~11%..74% of its width (animates `translate`). */
+  @keyframes glow-orbit {
+    0%   { translate: -22% -6%; }
+    14%  { translate: -11% -24%; }
+    27%  { translate: 8% -17%; }
+    40%  { translate: 22% -3%; }
+    55%  { translate: 13% 13%; }
+    68%  { translate: 2% 26%; }
+    82%  { translate: -15% 17%; }
+    100% { translate: -22% -6%; }
+  }
+  /* Small counter-wobble + bloom on a 7s period (animates `transform`/opacity);
+     7s vs 12s = combined path drifts each lap instead of retracing itself. */
+  @keyframes glow-wobble {
+    0%   { transform: translate(2%, -2%) scale(1);    opacity: 0.86; }
+    33%  { transform: translate(-3%, 2%) scale(1.2);  opacity: 1; }
+    66%  { transform: translate(3%, 3%)  scale(1.04); opacity: 0.9; }
+    100% { transform: translate(2%, -2%) scale(1);    opacity: 0.86; }
+  }
+  /* Mobile: same orbit/wobble (all %-based), only the patch shrinks so it
+     stays a roaming light instead of flooding the narrow viewport. */
+  @media (max-width: 600px) {
+    .hero-backdrop::before {
+      background: radial-gradient(320px 260px at 45% 46%, oklch(0.7 0.12 var(--accent-hue) / 0.32), transparent 62%);
+    }
+  }
   .shell {
     max-width: 1140px;
     margin: 0 auto;
@@ -139,6 +185,35 @@
     color: var(--fg);
     background: linear-gradient(180deg, transparent 68%, var(--accent-soft) 68% 94%, transparent 94%);
     padding: 0 0.08em;
+  }
+  /* Tagline highlight — the amber underline draws itself in after load */
+  .hero-tagline em {
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    animation: hl-draw-in 0.9s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+  }
+  .hero-tagline em:first-of-type { animation-delay: 0.55s; }
+  .hero-tagline em:last-of-type  { animation-delay: 1.05s; }
+  @keyframes hl-draw-in {
+    to { background-size: 100% 100%; }
+  }
+  /* Section labels — caret for the type-in */
+  .section-label .tw-caret {
+    display: inline-block;
+    width: 0.55ch;
+    height: 0.95em;
+    margin-left: 2px;
+    background: currentColor;
+    transform: translateY(1px);
+    animation: caret-blink 0.7s steps(1) infinite;
+  }
+  @keyframes caret-blink {
+    50% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-backdrop::before,
+    .hero-backdrop::after { animation: none; }
+    .hero-tagline em { animation: none; background-size: 100% 100%; }
   }
   .hero-sub {
     font-size: 1.08rem;
@@ -1113,6 +1188,7 @@
 </head>
 <body>
 
+
 <!-- ============ Mobile scroll indicator (< 720px only) ============ -->
 <div class="mscroll" aria-hidden="true"><div class="mscroll-fill" id="mscroll-fill"></div></div>
 <div class="msection" id="msection" aria-hidden="true">
@@ -1316,8 +1392,25 @@
 
 <script>
   // -------- Scroll reveal --------
+  // Section labels type themselves in when revealed
+  const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const typeLabel = (label) => {
+    if (REDUCED_MOTION || label.dataset.typed) return;
+    label.dataset.typed = '1';
+    const full = label.textContent.trim();
+    label.textContent = '';
+    const caret = document.createElement('span');
+    caret.className = 'tw-caret';
+    label.appendChild(caret);
+    let i = 0;
+    const tick = setInterval(() => {
+      caret.before(full[i] ?? '');
+      i += 1;
+      if (i >= full.length) { clearInterval(tick); setTimeout(() => caret.remove(), 650); }
+    }, 26);
+  };
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); e.target.querySelectorAll('.section-label').forEach(typeLabel); io.unobserve(e.target); } });
   }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
