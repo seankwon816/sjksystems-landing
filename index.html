@@ -141,6 +141,13 @@
     66%  { transform: translate(3%, 3%)  scale(1.04); opacity: 0.9; }
     100% { transform: translate(2%, -2%) scale(1);    opacity: 0.86; }
   }
+  /* Mobile: same orbit/wobble (all %-based), only the patch shrinks so it
+     stays a roaming light instead of flooding the narrow viewport. */
+  @media (max-width: 600px) {
+    .hero-backdrop::before {
+      background: radial-gradient(320px 260px at 45% 46%, oklch(0.7 0.12 var(--accent-hue) / 0.32), transparent 62%);
+    }
+  }
   /* FX DEMO badge — confirms you are looking at the demo build */
   .fx-badge {
     position: fixed;
