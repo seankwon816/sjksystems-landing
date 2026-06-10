@@ -100,6 +100,28 @@
     background:
       radial-gradient(900px 500px at 50% 0%, var(--accent-soft), transparent 70%);
     mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
+    overflow: hidden;
+  }
+  /* FX DEMO A — two slow-drifting light layers over the static glow */
+  .hero-backdrop::before,
+  .hero-backdrop::after {
+    content: "";
+    position: absolute;
+    inset: -22%;
+    background: radial-gradient(640px 430px at 32% 16%, var(--accent-soft), transparent 70%);
+    animation: glow-drift-a 26s ease-in-out infinite alternate;
+  }
+  .hero-backdrop::after {
+    background: radial-gradient(540px 400px at 74% 8%, oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.10), transparent 72%);
+    animation: glow-drift-b 34s ease-in-out infinite alternate;
+  }
+  @keyframes glow-drift-a {
+    from { transform: translate3d(-3%, -1%, 0) scale(1); }
+    to   { transform: translate3d(4%, 2.5%, 0) scale(1.08); }
+  }
+  @keyframes glow-drift-b {
+    from { transform: translate3d(3.5%, 1.5%, 0) scale(1.06); }
+    to   { transform: translate3d(-4%, -2%, 0) scale(1); }
   }
 
   .shell {
@@ -139,6 +161,35 @@
     color: var(--fg);
     background: linear-gradient(180deg, transparent 68%, var(--accent-soft) 68% 94%, transparent 94%);
     padding: 0 0.08em;
+  }
+  /* FX DEMO B — the amber underline draws itself in after load */
+  .hero-tagline em {
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    animation: hl-draw-in 0.9s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+  }
+  .hero-tagline em:first-of-type { animation-delay: 0.55s; }
+  .hero-tagline em:last-of-type  { animation-delay: 1.05s; }
+  @keyframes hl-draw-in {
+    to { background-size: 100% 100%; }
+  }
+  /* FX DEMO C — caret for the section-label type-in */
+  .section-label .tw-caret {
+    display: inline-block;
+    width: 0.55ch;
+    height: 0.95em;
+    margin-left: 2px;
+    background: currentColor;
+    transform: translateY(1px);
+    animation: caret-blink 0.7s steps(1) infinite;
+  }
+  @keyframes caret-blink {
+    50% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-backdrop::before,
+    .hero-backdrop::after { animation: none; }
+    .hero-tagline em { animation: none; background-size: 100% 100%; }
   }
   .hero-sub {
     font-size: 1.08rem;
@@ -1316,8 +1367,25 @@
 
 <script>
   // -------- Scroll reveal --------
+  // FX DEMO C — section labels type themselves in when revealed
+  const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const typeLabel = (label) => {
+    if (REDUCED_MOTION || label.dataset.typed) return;
+    label.dataset.typed = '1';
+    const full = label.textContent.trim();
+    label.textContent = '';
+    const caret = document.createElement('span');
+    caret.className = 'tw-caret';
+    label.appendChild(caret);
+    let i = 0;
+    const tick = setInterval(() => {
+      caret.before(full[i] ?? '');
+      i += 1;
+      if (i >= full.length) { clearInterval(tick); setTimeout(() => caret.remove(), 650); }
+    }, 26);
+  };
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); e.target.querySelectorAll('.section-label').forEach(typeLabel); io.unobserve(e.target); } });
   }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
