@@ -99,7 +99,9 @@
     z-index: 0;
     background:
       radial-gradient(900px 500px at 50% 0%, var(--accent-soft), transparent 70%);
-    mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
+    /* Solid to 55% (was 30%) so the roaming light survives into the lower
+       hero before dissolving at the section boundary. */
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
     overflow: hidden;
   }
   /* FX DEMO A — two light layers wandering across the hero, blooming as they go.
@@ -114,27 +116,29 @@
        warm light on the cream bg (global accent vars untouched).
        Tighter falloff (62%) = a trackable patch of light, not a diffuse wash —
        a soft-edged cloud never reads as moving no matter the speed. */
-    background: radial-gradient(560px 400px at 32% 16%, oklch(0.7 0.12 var(--accent-hue) / 0.3), transparent 62%);
+    background: radial-gradient(560px 400px at 32% 24%, oklch(0.7 0.12 var(--accent-hue) / 0.3), transparent 62%);
     animation: glow-wander-a 10s ease-in-out infinite;
   }
   .hero-backdrop::after {
-    background: radial-gradient(480px 360px at 74% 8%, oklch(0.7 0.11 var(--accent-hue) / 0.24), transparent 64%);
+    background: radial-gradient(480px 360px at 72% 16%, oklch(0.7 0.11 var(--accent-hue) / 0.24), transparent 64%);
     animation: glow-wander-b 14s ease-in-out infinite;
   }
-  /* Both lap clockwise (left->top->right->bottom), B phase-shifted vs A. */
+  /* Both lap clockwise (left->top->right->bottom), B phase-shifted vs A.
+     Vertical range reaches ~19-21% of layer height so the light sweeps the
+     full hero body, not just the top band. */
   @keyframes glow-wander-a {
-    0%   { transform: translate3d(-16%, 2%, 0) scale(1);    opacity: 0.85; }
-    25%  { transform: translate3d(-2%, -8%, 0) scale(1.2);  opacity: 1; }
-    50%  { transform: translate3d(16%, -1%, 0) scale(1.05); opacity: 0.88; }
-    75%  { transform: translate3d(2%, 7%, 0)   scale(1.26); opacity: 1; }
-    100% { transform: translate3d(-16%, 2%, 0) scale(1);    opacity: 0.85; }
+    0%   { transform: translate3d(-18%, -2%, 0) scale(1);    opacity: 0.85; }
+    25%  { transform: translate3d(-3%, -11%, 0) scale(1.2);  opacity: 1; }
+    50%  { transform: translate3d(18%, 2%, 0)   scale(1.05); opacity: 0.88; }
+    75%  { transform: translate3d(3%, 19%, 0)   scale(1.26); opacity: 1; }
+    100% { transform: translate3d(-18%, -2%, 0) scale(1);    opacity: 0.85; }
   }
   @keyframes glow-wander-b {
-    0%   { transform: translate3d(7%, -7%, 0)  scale(1.06); opacity: 0.88; }
-    25%  { transform: translate3d(15%, 4%, 0)  scale(1.22); opacity: 1; }
-    50%  { transform: translate3d(-5%, 8%, 0)  scale(1);    opacity: 0.85; }
-    75%  { transform: translate3d(-15%, -3%, 0) scale(1.24); opacity: 1; }
-    100% { transform: translate3d(7%, -7%, 0)  scale(1.06); opacity: 0.88; }
+    0%   { transform: translate3d(8%, -9%, 0)   scale(1.06); opacity: 0.88; }
+    25%  { transform: translate3d(16%, 8%, 0)   scale(1.22); opacity: 1; }
+    50%  { transform: translate3d(-5%, 21%, 0)  scale(1);    opacity: 0.85; }
+    75%  { transform: translate3d(-16%, -1%, 0) scale(1.24); opacity: 1; }
+    100% { transform: translate3d(8%, -9%, 0)   scale(1.06); opacity: 0.88; }
   }
   /* FX DEMO badge — confirms you are looking at the demo build */
   .fx-badge {
