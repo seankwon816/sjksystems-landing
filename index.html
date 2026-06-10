@@ -110,11 +110,13 @@
     content: "";
     position: absolute;
     inset: -22%;
-    background: radial-gradient(640px 430px at 32% 16%, oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.17), transparent 70%);
+    /* Glow-only color: lighter + more chromatic than --accent so it reads as
+       warm light on the cream bg (global accent vars untouched). */
+    background: radial-gradient(760px 520px at 32% 16%, oklch(0.7 0.135 var(--accent-hue) / 0.42), transparent 70%);
     animation: glow-wander-a 26s ease-in-out infinite;
   }
   .hero-backdrop::after {
-    background: radial-gradient(540px 400px at 74% 8%, oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.13), transparent 72%);
+    background: radial-gradient(640px 470px at 74% 8%, oklch(0.7 0.125 var(--accent-hue) / 0.34), transparent 72%);
     animation: glow-wander-b 34s ease-in-out infinite;
   }
   @keyframes glow-wander-a {
