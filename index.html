@@ -104,7 +104,7 @@
     mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
     overflow: hidden;
   }
-  /* FX DEMO A — one patch of light roaming section 1: a wide clockwise orbit
+  /* Hero glow — one patch of light roaming section 1: a wide clockwise orbit
      with irregular waypoints (12s) composed with a small faster wobble (7s).
      The two periods never line up, so the path reads as organic/random while
      still circling clockwise overall. */
@@ -148,22 +148,6 @@
       background: radial-gradient(320px 260px at 45% 46%, oklch(0.7 0.12 var(--accent-hue) / 0.32), transparent 62%);
     }
   }
-  /* FX DEMO badge — confirms you are looking at the demo build */
-  .fx-badge {
-    position: fixed;
-    left: 14px;
-    bottom: 14px;
-    z-index: 70;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.14em;
-    color: var(--fg);
-    border: 1px solid var(--line-strong);
-    background: color-mix(in oklab, var(--bg-card) 92%, transparent);
-    padding: 6px 10px;
-    border-radius: 6px;
-  }
-
   .shell {
     max-width: 1140px;
     margin: 0 auto;
@@ -202,7 +186,7 @@
     background: linear-gradient(180deg, transparent 68%, var(--accent-soft) 68% 94%, transparent 94%);
     padding: 0 0.08em;
   }
-  /* FX DEMO B — the amber underline draws itself in after load */
+  /* Tagline highlight — the amber underline draws itself in after load */
   .hero-tagline em {
     background-repeat: no-repeat;
     background-size: 0% 100%;
@@ -213,7 +197,7 @@
   @keyframes hl-draw-in {
     to { background-size: 100% 100%; }
   }
-  /* FX DEMO C — caret for the section-label type-in */
+  /* Section labels — caret for the type-in */
   .section-label .tw-caret {
     display: inline-block;
     width: 0.55ch;
@@ -1204,7 +1188,6 @@
 </head>
 <body>
 
-<div class="fx-badge" aria-hidden="true">FX DEMO</div>
 
 <!-- ============ Mobile scroll indicator (< 720px only) ============ -->
 <div class="mscroll" aria-hidden="true"><div class="mscroll-fill" id="mscroll-fill"></div></div>
@@ -1409,7 +1392,7 @@
 
 <script>
   // -------- Scroll reveal --------
-  // FX DEMO C — section labels type themselves in when revealed
+  // Section labels type themselves in when revealed
   const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const typeLabel = (label) => {
     if (REDUCED_MOTION || label.dataset.typed) return;
