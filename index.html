@@ -108,20 +108,35 @@
     content: "";
     position: absolute;
     inset: -22%;
-    background: radial-gradient(640px 430px at 32% 16%, var(--accent-soft), transparent 70%);
-    animation: glow-drift-a 26s ease-in-out infinite alternate;
+    background: radial-gradient(640px 430px at 32% 16%, oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.17), transparent 70%);
+    animation: glow-drift-a 14s ease-in-out infinite alternate;
   }
   .hero-backdrop::after {
-    background: radial-gradient(540px 400px at 74% 8%, oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.10), transparent 72%);
-    animation: glow-drift-b 34s ease-in-out infinite alternate;
+    background: radial-gradient(540px 400px at 74% 8%, oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue) / 0.13), transparent 72%);
+    animation: glow-drift-b 20s ease-in-out infinite alternate;
   }
   @keyframes glow-drift-a {
-    from { transform: translate3d(-3%, -1%, 0) scale(1); }
-    to   { transform: translate3d(4%, 2.5%, 0) scale(1.08); }
+    from { transform: translate3d(-5%, -2%, 0) scale(1); }
+    to   { transform: translate3d(6%, 3.5%, 0) scale(1.1); }
   }
   @keyframes glow-drift-b {
-    from { transform: translate3d(3.5%, 1.5%, 0) scale(1.06); }
-    to   { transform: translate3d(-4%, -2%, 0) scale(1); }
+    from { transform: translate3d(5%, 2%, 0) scale(1.08); }
+    to   { transform: translate3d(-6%, -3%, 0) scale(1); }
+  }
+  /* FX DEMO badge — confirms you are looking at the demo build */
+  .fx-badge {
+    position: fixed;
+    left: 14px;
+    bottom: 14px;
+    z-index: 70;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    color: var(--fg);
+    border: 1px solid var(--line-strong);
+    background: color-mix(in oklab, var(--bg-card) 92%, transparent);
+    padding: 6px 10px;
+    border-radius: 6px;
   }
 
   .shell {
@@ -1163,6 +1178,8 @@
 </style>
 </head>
 <body>
+
+<div class="fx-badge" aria-hidden="true">FX DEMO</div>
 
 <!-- ============ Mobile scroll indicator (< 720px only) ============ -->
 <div class="mscroll" aria-hidden="true"><div class="mscroll-fill" id="mscroll-fill"></div></div>
