@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SJK Systems, Inc. | Supervised Agent Workspace and Telecom Infrastructure</title>
-<meta name="description" content="SJK Systems builds AI agent infrastructure. ClevAgent is a supervised workspace for more efficient agent work. ForAgent gives AI agents private numbers so they can call each other through a controlled app.">
+<meta name="description" content="SJK Systems builds AI agent infrastructure. ClevAgent is a supervised workspace that helps agents avoid waste and messy context. ForAgent gives AI agents private numbers so they can call each other through a controlled app.">
 <link rel="canonical" href="https://sjksystems.com/">
 <link rel="icon" type="image/png" href="assets/favicon-light.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -161,7 +161,7 @@
      ========================================================= */
   .hero {
     position: relative;
-    padding: 140px 0 78px;
+    padding: 104px 0 54px;
   }
   .shell { position: relative; z-index: 2; }
   .hero-logo {
@@ -220,7 +220,7 @@
     line-height: 1.65;
     color: var(--fg-dim);
     max-width: var(--hero-copy-width);
-    margin-bottom: 48px;
+    margin-bottom: 30px;
   }
   .hero-meta {
     display: flex;
@@ -232,81 +232,11 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
-  .hero-support {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 17px;
-    width: min(100%, var(--hero-copy-width));
-  }
-  .hero-support-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  .hero-support-label {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.66rem;
-    letter-spacing: 0.14em;
-    line-height: 1;
-    color: var(--fg-mute);
-  }
-  .support-logos {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 18px;
-    padding: 0;
-    margin-left: 0;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .support-partner {
-    display: inline-grid;
-    gap: 8px;
-    align-items: start;
-    line-height: 1;
-  }
-  .support-logo {
-    display: block;
-    width: auto;
-    object-fit: contain;
-  }
-  .support-logo-ms {
-    height: 26px;
-  }
-  .support-logo-dd {
-    height: 34px;
-  }
-  .support-logo-gfs {
-    height: 32px;
-  }
-  .support-program {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.64rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-mute);
-    white-space: nowrap;
-  }
-  .support-divider {
-    width: 1px;
-    height: 32px;
-    background: var(--line);
-    display: inline-block;
-    align-self: center;
-  }
   .hero-facts {
     display: flex;
     align-items: center;
     gap: 18px;
-    margin-top: 30px;
+    margin-top: 0;
     padding-top: 0;
     font-size: 0.66rem;
     letter-spacing: 0.14em;
@@ -524,7 +454,7 @@
     transform: scale(1.06) rotate(1deg);
   }
   .product-card.foragent:hover .product-robot-illust {
-    transform: scale(1.06) rotate(-2deg);
+    transform: scale(1.06);
   }
   .robot-illust-img {
     position: relative;
@@ -544,7 +474,7 @@
     top: 24px; /* Shift phone slightly downward */
     max-height: 165px;
     filter: drop-shadow(0 10px 24px rgba(139, 92, 246, 0.06));
-    animation: phone-ring 3.5s ease-in-out infinite;
+    animation: phone-shake 1.65s ease-in-out infinite;
   }
   .product-card.foragent:hover .robot-illust-img.foragent-phone {
     filter: drop-shadow(0 14px 32px color-mix(in oklab, var(--card-accent) 18%, rgba(0, 0, 0, 0.08)));
@@ -553,23 +483,15 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
   }
-  @keyframes phone-ring {
-    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-    /* Rhythmic ring pulse 1 */
-    12% { transform: translateX(-2.5px) rotate(-1.8deg); }
-    16% { transform: translateX(2.5px) rotate(1.8deg); }
-    20% { transform: translateX(-2px) rotate(-1.2deg); }
-    24% { transform: translateX(2px) rotate(1.2deg); }
-    28% { transform: translateX(-1px) rotate(-0.6deg); }
-    32% { transform: translateX(1px) rotate(0.6deg); }
-    36%, 60% { transform: translateX(0) translateY(0) rotate(0deg); }
-    /* Rhythmic ring pulse 2 */
-    68% { transform: translateX(-2.5px) rotate(-1.8deg); }
-    72% { transform: translateX(2.5px) rotate(1.8deg); }
-    76% { transform: translateX(-2px) rotate(-1.2deg); }
-    80% { transform: translateX(2px) rotate(1.2deg); }
-    84% { transform: translateX(-1px) rotate(-0.6deg); }
-    88% { transform: translateX(1px) rotate(0.6deg); }
+  @keyframes phone-shake {
+    0%, 100% { transform: translateX(0); }
+    4% { transform: translateX(-5px); }
+    8% { transform: translateX(5px); }
+    12% { transform: translateX(-5px); }
+    16% { transform: translateX(5px); }
+    20% { transform: translateX(-3px); }
+    24% { transform: translateX(3px); }
+    28%, 100% { transform: translateX(0); }
   }
   .product-features li {
     display: flex;
@@ -851,33 +773,23 @@
     .shell { padding-left: 20px; padding-right: 20px; }
 
     /* Hero */
-    .hero { padding: 72px 0 46px; }
+    .hero { padding: 72px 0 34px; }
     .hero-logo { width: 160px; margin: 12px 0 -24px -4px; }
     .hero-tagline { font-size: clamp(1.75rem, 8.2vw, 2.2rem); letter-spacing: -0.028em; line-height: 1.12; margin-bottom: 22px; max-width: none; }
-    .hero-sub { font-size: 0.98rem; line-height: 1.6; margin-bottom: 32px; }
+    .hero-sub { font-size: 0.98rem; line-height: 1.6; margin-bottom: 22px; }
 
-    /* Hero meta row — support logos / Michigan C-Corp / Est. 2026 */
+    /* Hero meta row — Michigan C-Corp / Est. 2026 */
     .hero-meta {
       align-items: flex-start;
       font-size: 0.68rem;
       letter-spacing: 0.03em;
     }
-    .hero-support-head { gap: 16px; }
-    .hero-support-label, .hero-facts { font-size: 0.625rem; letter-spacing: 0.1em; }
-    .hero-support { gap: 13px; width: min(100%, var(--hero-copy-width)); }
-    .support-logos { gap: 14px; padding: 0; margin-left: 0; }
-    .support-logo-ms { height: 20px; }
-    .support-logo-dd { height: 27px; }
-    .support-logo-gfs { height: 24px; }
-    .support-partner { gap: 7px; }
-    .support-program { font-size: 0.625rem; letter-spacing: 0.1em; }
-    .support-divider { width: 1px; height: 24px; }
+    .hero-facts { font-size: 0.625rem; letter-spacing: 0.1em; }
     .hero-facts { gap: 12px; flex-wrap: nowrap; }
     .hero-facts span + span::before { content: "·"; width: auto; height: auto; background: none; color: var(--fg-faint); }
 
     @media (max-width: 360px) {
-      .hero-support-head { gap: 12px; }
-      .hero-support-label, .hero-facts { font-size: 0.625rem; letter-spacing: 0.08em; }
+      .hero-facts { font-size: 0.625rem; letter-spacing: 0.08em; }
       .hero-facts { gap: 9px; }
     }
 
@@ -1214,31 +1126,12 @@
       Infrastructure for agent <em>work</em> and <em>connection</em>.
     </h1>
     <p class="hero-sub reveal" data-copy="sub">
-      ClevAgent gives agents a supervised workspace. ForAgent gives them a controlled way to connect.
+      ClevAgent gives agents a supervised place to work. ForAgent gives them a controlled way to connect.
     </p>
-    <div class="hero-meta reveal">
-      <div class="hero-support" aria-label="Supported by Microsoft Founders Hub, Datadog for Startups, and Google for Startups">
-        <span class="hero-support-label">Supported by</span>
-        <div class="support-logos">
-          <span class="support-partner">
-            <img src="assets/microsoft-logo.png" alt="Microsoft" class="support-logo support-logo-ms" width="216" height="46">
-            <span class="support-program">Founders Hub</span>
-          </span>
-          <span class="support-divider" aria-hidden="true"></span>
-          <span class="support-partner">
-            <img src="assets/datadog-horizontal-purple.svg" alt="Datadog" class="support-logo support-logo-dd" width="800" height="203">
-            <span class="support-program">for Startups</span>
-          </span>
-          <span class="support-divider" aria-hidden="true"></span>
-          <span class="support-partner">
-            <img src="assets/google-logo.webp" alt="Google" class="support-logo support-logo-gfs" width="2499" height="819">
-            <span class="support-program">for Startups</span>
-          </span>
-        </div>
-        <div class="hero-facts" aria-label="Company details">
-          <span>Michigan C-Corp</span>
-          <span>Est. 2026</span>
-        </div>
+    <div class="hero-meta" aria-label="Company details">
+      <div class="hero-facts">
+        <span>Michigan C-Corp</span>
+        <span>Est. 2026</span>
       </div>
     </div>
   </div>
@@ -1254,10 +1147,10 @@
       </div>
       <div class="thesis-body reveal">
         <p data-copy="thesis-1">
-          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. A single agent needs an environment where its work can be observed, guided, and improved. Multiple agents need private numbers and a controlled way to call each other.
+          Autonomous agents are moving from demos into real work. But the infrastructure around them is still thin. People need a place where agent work can be observed, guided, passed between agents, and kept clean. Agents also need private numbers and a controlled way to call each other.
         </p>
         <p data-copy="thesis-2">
-          SJK Systems builds that middle layer. <em>ClevAgent</em> adds a guidance layer around individual agent sessions. <em>ForAgent</em> gives agents private numbers and a phone-like app for controlled agent-to-agent calls.
+          SJK Systems builds that middle layer. <em>ClevAgent</em> brings guidance to agent work and coordination to multi-agent teams. <em>ForAgent</em> gives agents private numbers and a phone-like app for controlled agent-to-agent calls.
         </p>
       </div>
     </div>
@@ -1281,14 +1174,14 @@
           <img src="assets/clevagent-icon.svg" alt="ClevAgent logo" class="product-logo">
         </header>
         <p class="product-desc" data-copy="clev-desc">
-          A guidance layer for agent sessions. ClevAgent watches the work as it happens and adds the right nudge when the agent needs a better next move.
+          A supervised workspace for agent work. ClevAgent lets you run multiple agents, catch waste or messy context as they work, and pass next steps between them.
         </p>
         <div class="product-features-wrap">
           <ul class="product-features">
-            <li>Agent session guidance</li>
+            <li>Multi-agent workspace</li>
             <li>Waste and loop detection</li>
-            <li>File and memory hygiene</li>
-            <li>Reviewable work history</li>
+            <li>Agent-to-agent handoff</li>
+            <li>File and context hygiene</li>
           </ul>
           <div class="product-robot-illust">
             <img src="assets/robot_waving_pose.png" alt="ClevAgent Robot Mascot" class="robot-illust-img">
@@ -1317,7 +1210,7 @@
             <li>Payload-blind routing</li>
           </ul>
           <div class="product-robot-illust">
-            <img src="assets/foragent_phone_preview.png" alt="ForAgent Phone Preview" class="robot-illust-img foragent-phone">
+            <img src="assets/foragent-incoming-call.png" alt="ForAgent incoming call approval screen" class="robot-illust-img foragent-phone">
           </div>
         </div>
         <a href="https://foragent.io" target="_blank" rel="noopener" class="product-cta">
@@ -1343,7 +1236,7 @@
         </div>
         <div class="founder-bio">
           <p>Sean’s time in investment brokerage shaped a simple belief: the layer between intent and execution matters.</p>
-          <p>SJK Systems builds that middle layer. ClevAgent adds guidance around individual agent sessions as work happens. ForAgent gives agents private numbers and controlled channels to communicate.</p>
+          <p>SJK Systems builds that middle layer. ClevAgent helps people guide agent work and coordinate multiple agents in one workspace. ForAgent gives agents private numbers and controlled channels to communicate.</p>
           <p>If this is a problem you’re thinking about, we’d like to talk.</p>
         </div>
       </div>
@@ -1374,7 +1267,7 @@
     <div class="footer-inner">
       <div class="legal">
         © 2026 SJK Systems, Inc.<br>
-        Ann Arbor, Michigan
+        Detroit, Michigan
       </div>
       <div class="footer-mini">
         <span class="fm-product fm-clev">
