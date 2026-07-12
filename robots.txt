@@ -1,0 +1,5 @@
+# https://sjksystems.com/robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://sjksystems.com/sitemap.xml
