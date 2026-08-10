@@ -44,8 +44,7 @@
       "sameAs": [
         "https://clevagent.io/",
         "https://foragent.io/",
-        "https://www.linkedin.com/in/seanjkwon/",
-        "https://x.com/seankwon0816"
+        "https://www.linkedin.com/in/seanjkwon/"
       ]
     },
     {
@@ -1142,6 +1141,148 @@
 </style>
 </head>
 <body>
+
+<!-- ============ Security notice popup (2026-08-10) ============ -->
+<style>
+  .secpop {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    background: color-mix(in oklab, var(--fg) 34%, transparent);
+    backdrop-filter: saturate(140%) blur(3px);
+    -webkit-backdrop-filter: saturate(140%) blur(3px);
+  }
+  .secpop[hidden] { display: none; }
+
+  .secpop-card {
+    /* 경고색. 사이트 --accent(hue 28)의 이웃에서 채도만 올린 것 */
+    --card-accent: oklch(0.52 0.19 25);
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 34px 32px 28px 38px;
+    max-width: 540px; width: 100%;
+    max-height: 86vh; overflow-y: auto;
+    box-shadow:
+      0 24px 60px -20px color-mix(in oklab, var(--card-accent) 14%, rgba(0, 0, 0, 0.20)),
+      0 3px 10px -5px color-mix(in oklab, var(--card-accent) 6%, rgba(0, 0, 0, 0.04));
+  }
+  /* 사이트의 signature bar 와 같은 장치 — 색을 쓰는 유일한 표면 */
+  .secpop-card::before {
+    content: ""; position: absolute;
+    top: 34px; left: 0; width: 3px; height: 34px;
+    background: var(--card-accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* 모노·전대문자·넓은 자간을 쓰지 않는다. 그 조합이 «기계 라벨»처럼 읽힌다.
+     본문과 같은 Inter Tight 로, 색과 굵기로만 구분한다. */
+  .secpop-label {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.83rem; font-weight: 600; letter-spacing: 0;
+    color: var(--card-accent);
+    margin-bottom: 14px;
+  }
+
+  .secpop-card h2 {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    font-size: clamp(1.35rem, 2.4vw, 1.6rem);
+    line-height: 1.2; letter-spacing: -0.02em;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .secpop-card p {
+    font-size: 0.95rem; line-height: 1.62;
+    color: var(--fg-dim);
+    margin-bottom: 13px;
+  }
+  .secpop-card p strong { font-weight: 600; color: var(--fg); }
+  .secpop-card a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+
+  .secpop-meta {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.86rem; letter-spacing: 0;
+    color: var(--fg-mute);
+    margin: 22px 0 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    line-height: 1.75;
+  }
+
+  .secpop-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.82rem; font-weight: 600;
+    padding: 9px 18px; border-radius: 6px; cursor: pointer;
+    border: 1px solid color-mix(in oklab, var(--card-accent) 26%, var(--line-strong));
+    background: color-mix(in oklab, var(--card-accent) 3.5%, rgba(253, 252, 251, 0.4));
+    color: color-mix(in oklab, var(--card-accent) 85%, var(--fg-dim));
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+    transition:
+      color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .secpop-btn:hover {
+    color: var(--card-accent);
+    border-color: color-mix(in oklab, var(--card-accent) 60%, var(--line-strong));
+    background: color-mix(in oklab, var(--card-accent) 8%, rgba(253, 252, 251, 0.8));
+    box-shadow: 0 4px 12px -4px color-mix(in oklab, var(--card-accent) 20%, transparent);
+  }
+
+  @media (max-width: 560px) {
+    .secpop { padding: 16px; }
+    .secpop-card { padding: 28px 22px 24px 28px; }
+    .secpop-card h2 { font-size: 1.2rem; }
+    .secpop-card p { font-size: 0.9rem; }
+  }
+</style>
+
+<div class="secpop" id="secpop" role="alertdialog" aria-modal="true"
+     aria-labelledby="secpop-h" hidden>
+  <div class="secpop-card">
+    <div class="secpop-label">Security notice</div>
+    <h2 id="secpop-h">My X (Twitter) account is compromised.</h2>
+    <p>I am currently <strong>NOT</strong> using X.</p>
+    <p>Anything posted or sent from that account is <strong>not from me and not from SJK
+       Systems</strong>. We will never ask you for money, crypto, wallet access, login
+       details, or personal information on X.</p>
+    <p>If you received a message from that account, do not reply, do not click any link,
+       and do not send funds.</p>
+    <p class="secpop-meta">
+      Verified contact: <a href="mailto:sean@sjksystems.com">sean@sjksystems.com</a><br>
+      Posted 2026-08-10
+    </p>
+    <button class="secpop-btn" id="secpop-ok" type="button">I understand</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // 팝업이 이제 «유일한» 전달 수단이다 (상단 띠 제거). 그래서 기억해 두고 건너뛰지
+  // 않는다 — 열 때마다 뜬다. 한 장짜리 사이트라 실질적으로 「방문당 한 번」이다.
+  var pop = document.getElementById('secpop');
+  var ok = document.getElementById('secpop-ok');
+  if (!pop || !ok) return;
+
+  var lastFocus = document.activeElement;
+  pop.hidden = false;
+  ok.focus();
+
+  function close() {
+    pop.hidden = true;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  ok.addEventListener('click', close);
+  pop.addEventListener('click', function (e) { if (e.target === pop) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !pop.hidden) close();
+  });
+})();
+</script>
 
 
 <!-- ============ Mobile scroll indicator (< 720px only) ============ -->
