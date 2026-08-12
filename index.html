@@ -1155,8 +1155,9 @@
   .secpop[hidden] { display: none; }
 
   .secpop-card {
-    /* 경고색. 사이트 --accent(hue 28)의 이웃에서 채도만 올린 것 */
-    --card-accent: oklch(0.52 0.19 25);
+    /* 사이트 자기 --accent 를 그대로 쓴다. 경고 빨강을 쓰면 회사가 위기에 빠진
+       것처럼 읽힌다 (Sean 2026-08-12). 이건 «경보»가 아니라 «안내»다. */
+    --card-accent: var(--accent);
     position: relative;
     background: var(--bg-card);
     border: 1px solid var(--line);
@@ -1244,17 +1245,14 @@
 <div class="secpop" id="secpop" role="alertdialog" aria-modal="true"
      aria-labelledby="secpop-h" hidden>
   <div class="secpop-card">
-    <div class="secpop-label">Security notice</div>
-    <h2 id="secpop-h">My X (Twitter) account is compromised.</h2>
-    <p>I am currently <strong>NOT</strong> using X.</p>
-    <p>Anything posted or sent from that account is <strong>not from me and not from SJK
-       Systems</strong>. We will never ask you for money, crypto, wallet access, login
-       details, or personal information on X.</p>
-    <p>If you received a message from that account, do not reply, do not click any link,
-       and do not send funds.</p>
+    <div class="secpop-label">Please note</div>
+    <h2 id="secpop-h">I do not maintain an active presence on X (Twitter).</h2>
+    <p>Any messages or posts from accounts under my name on that platform are
+       <strong>unauthorized</strong>.</p>
+    <p>If you receive one, please do not respond or act on it.</p>
     <p class="secpop-meta">
       Verified contact: <a href="mailto:sean@sjksystems.com">sean@sjksystems.com</a><br>
-      Posted 2026-08-10
+      Posted 2026-08-12
     </p>
     <button class="secpop-btn" id="secpop-ok" type="button">I understand</button>
   </div>
