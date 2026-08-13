@@ -1107,27 +1107,6 @@
   }
 
 
-  /* ==== X notice (2026-08-13) ==== */
-  .topnote {
-    background: color-mix(in oklab, var(--accent) 5%, var(--bg));
-    border-bottom: 1px solid var(--line);
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: var(--fg-dim);
-    text-align: center;
-  }
-  .topnote .shell {
-    padding-top: 11px; padding-bottom: 11px;
-    max-width: 40rem;
-    /* Even out the two lines on phones. Without this it splits 66 / 19
-       characters at 414px, which reads as a mistake. */
-    text-wrap: balance;
-  }
-  @media (max-width: 720px) {
-    .topnote { font-size: 0.74rem; }
-    .topnote .shell { padding-top: 10px; padding-bottom: 10px; }
-  }
-  /* ==== /X notice ==== */
 </style>
 </head>
 <body>
@@ -1137,12 +1116,6 @@
 <div class="mscroll" aria-hidden="true"><div class="mscroll-fill" id="mscroll-fill"></div></div>
 
 <!-- ============ Side nav ============ -->
-<!-- ============ X notice (2026-08-13) ============ -->
-<div class="topnote">
-  <div class="shell">We are not on X (Twitter). Any account there using our name is not affiliated with us.</div>
-</div>
-<!-- ============ /X notice ============ -->
-
 <nav class="sidenav" id="sidenav" aria-label="Section navigation">
   <a href="#top" data-target="top"><span class="sn-label">Overview</span><span class="sn-tick"></span></a>
   <a href="#thesis" data-target="thesis"><span class="sn-label">Thesis</span><span class="sn-tick"></span></a>
