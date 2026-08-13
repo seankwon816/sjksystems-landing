@@ -868,8 +868,8 @@
   }
 
   /* =========================================================
-     Mobile scroll progress bar + section counter (< 720px)
-     Fixed thin bar at very top + floating section pill top-right.
+     Mobile scroll progress bar (< 720px)
+     Fixed thin bar at the very top.
      ========================================================= */
   .mscroll {
     position: fixed;
@@ -888,39 +888,8 @@
     background: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue));
     transition: width 0.12s linear;
   }
-  .msection {
-    position: fixed;
-    top: calc(env(safe-area-inset-top, 0px) + 12px);
-    right: calc(env(safe-area-inset-right, 0px) + 14px);
-    z-index: 60;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border: 1px solid var(--line-strong);
-    background: color-mix(in oklab, var(--bg-card) 95%, transparent);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 999px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.625rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--fg-mute);
-    pointer-events: none;
-  }
-  .msection .ms-num {
-    color: var(--fg);
-    font-weight: 500;
-  }
-  .msection .ms-dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    background: oklch(var(--accent-l) var(--accent-chroma) var(--accent-hue));
-    opacity: 0.8;
-  }
   @media (max-width: 720px) {
     .mscroll { display: block; }
-    .msection { display: inline-flex; }
   }
 
   /* =========================================================
@@ -1147,7 +1116,13 @@
     color: var(--fg-dim);
     text-align: center;
   }
-  .topnote .shell { padding-top: 11px; padding-bottom: 11px; }
+  .topnote .shell {
+    padding-top: 11px; padding-bottom: 11px;
+    max-width: 40rem;
+    /* Even out the two lines on phones. Without this it splits 66 / 19
+       characters at 414px, which reads as a mistake. */
+    text-wrap: balance;
+  }
   @media (max-width: 720px) {
     .topnote { font-size: 0.74rem; }
     .topnote .shell { padding-top: 10px; padding-bottom: 10px; }
@@ -1160,11 +1135,6 @@
 
 <!-- ============ Mobile scroll indicator (< 720px only) ============ -->
 <div class="mscroll" aria-hidden="true"><div class="mscroll-fill" id="mscroll-fill"></div></div>
-<div class="msection" id="msection" aria-hidden="true">
-  <span class="ms-dot"></span>
-  <span class="ms-num" id="msection-num">00</span>
-  <span id="msection-label">Overview</span>
-</div>
 
 <!-- ============ Side nav ============ -->
 <!-- ============ X notice (2026-08-13) ============ -->
@@ -1386,29 +1356,18 @@
     // Near top? Force 'top'.
     if (window.scrollY < 120) current = 'top';
     setActive(current);
-    updateMobileIndicator(current);
+    updateMobileIndicator();
   };
   window.addEventListener('scroll', updateActive, { passive: true });
   window.addEventListener('resize', updateActive);
 
-  // -------- Mobile scroll progress + section label --------
+  // -------- Mobile scroll progress --------
   const mScrollFill = document.getElementById('mscroll-fill');
-  const mSectionNum = document.getElementById('msection-num');
-  const mSectionLabel = document.getElementById('msection-label');
-  const SECTION_META = {
-    top:      { num: '00', label: 'Overview'    },
-    thesis:   { num: '01', label: 'Thesis'      },
-    products: { num: '02', label: 'Products'    },
-    team:     { num: '03', label: 'Founder'     },
-  };
-  function updateMobileIndicator(id) {
+  function updateMobileIndicator() {
     const doc = document.documentElement;
     const max = (doc.scrollHeight - window.innerHeight) || 1;
     const pct = Math.max(0, Math.min(1, window.scrollY / max));
     if (mScrollFill) mScrollFill.style.width = (pct * 100).toFixed(2) + '%';
-    const meta = SECTION_META[id] || SECTION_META.top;
-    if (mSectionNum)   mSectionNum.textContent   = meta.num;
-    if (mSectionLabel) mSectionLabel.textContent = meta.label;
   }
   updateActive();
 </script>
